@@ -1,0 +1,30 @@
+<main class="container-fluid">
+        
+        <header class="row">
+            <!--info contact + links + dropdown-->
+            <div class="col d-flex bg-marron align-items-center justify-content-end">
+                <p><a href="tel:01.23.45.67.89"><i class="fas fa-phone-alt"></i> 01.23.45.67.89</a></p>
+                <p>|</p>
+                <p><a href="tel:09-87-65-43-21"><i class="fas fa-phone-alt"></i> 09-87-65-43-21</a></p>
+            </div>
+            <div class="col d-flex bg-noir align-items-center">
+                <p><a href="mailto:contact@shangrila.com"><i class="far fa-envelope"></i> contact@shangrila.com</a></p>
+            </div>
+            <ul class="nav col d-flex bg-noir">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="{{path('account_login')}}"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('account_register')}}"><i class="far fa-edit"></i> S'inscrire</a>
+                  </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="img/lang.jpg" alt="french flag"> FR</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">EN</a></li>
+                    <li><a class="dropdown-item" href="#">ES</a></li>
+                    <li><a class="dropdown-item" href="#">DE</a></li>
+                  </ul>
+                </li>
+              </ul>
+           
+        </header>

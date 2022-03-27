@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block body %}
+
+    {% include 'inc/nav-header.html.twig' %}
+
+    <section class="container-fluid login">
+        <div class="row justify-content-center">
+
+        {% if error %}
+            <div class="alert alert-danger">Erreur: Le mot de passe ou l'identifiant est incorrect.</div>
+    
+        {% endif %}
+          
+            <div class="col-md-6 jumbotron">
+                  <h2>Connectez-vous</h2>
+
+                  <form action="{{path('account_login')}}" method="post">
+                    <div class="form-group">
+                        <label for="email" class='mb-2'>Email</label>
+                        <input type="text" name="_username" id="email" class="form-control mb-2 border border-secondary" placeholder="Votre adresse mail" required value={{ last_username }}>     
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class='mb-2'>Mot de passe</label>
+                        <input type="password" name="_password" id="password" class="form-control mb-2 border border-secondary" placeholder="Votre mot de passe" required>     
+                    </div>
+                    <div class="form-group mb-2">
+                        <button type="submit" class="btn btn-brown mt-2">Connexion</button>
+                    </div>         
+                  </form>
+            
+            </div>            
+        </div>
+    
+    </section>
+
+    
+{% endblock %}

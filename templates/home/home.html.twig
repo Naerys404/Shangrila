@@ -1,0 +1,373 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block body %}
+    <section id="navMenu" class="row">
+          <div class="container-fluid main-logo"><img src="img/logo.png" class="img-fluid" alt="logo"></div>
+            <!--logo + navbar-->
+            <nav class="navbar navbar-expand-md navbar-light justify-content-center">
+                <div class="container-fluid">
+                  
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{path('homePage')}}">Accueil</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">A propos</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Reservation</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Menu</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Galerie</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Boutique</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                      </li>
+                    </ul>
+                    <form class="d-flex">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-dark" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                  </div>
+                </div>
+              </nav>
+        </section>
+        <section id="presentation" class="row text-center pt-5">
+            <!--background overlay + titre + p + button + logo et navbar overlay -->
+                <div class="col">
+                    <h1>Interpellatta <br> <span style="color:#fff;">paucis indignatis</span></h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam animi amet in obcaecati voluptatibus dignissimos.</p>
+                    <a href="#" class="btn btn-md" tabindex="-1" role="button" aria-disabled="true">+ Détails</a>
+                </div>    
+
+        </section>
+        <div class="homeStickyNav sticky-top">
+            {% include 'inc/nav-header.html.twig' %}
+        </div>
+
+        <section id="menu" class="row">
+            <!--titre + ss titre + card avec buttons-->
+            <div class="title text-center mt-5">
+                <h3>Menu</h3>
+                <h4>Lorem ipsum dolor</h4>
+            </div>
+            <div class="row col-md-10 offset-md-2 mr-auto mt-5">
+            <div class="card mb-3" style="max-width:520px;">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="img/delicious_1.jpg" alt="gateaux">
+                </div>
+                <div class="col-md-6">
+                  <div class="card-body">
+                    <h5 class="card-title">Petit Déjeuner</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eaque cupiditate eos dignissimos.</p>
+                    <a class="btn" href="#">Commander</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card mb-3" style="max-width: 520px;">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="img/delicious_2.jpg" alt="gateaux">
+                </div>
+                <div class="col-md-6">
+                  <div class="card-body">
+                    <h5 class="card-title">Déjeuner</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eaque cupiditate eos dignissimos..</p>
+                    <a class="btn" href="#">Commander</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card mb-3" style="max-width: 520px;">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="img/delicious_3.jpg" alt="gateaux">
+                </div>
+                <div class="col-md-6">
+                  <div class="card-body">
+                    <h5 class="card-title">Diner</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eaque cupiditate eos dignissimos.</p>
+                    <a class="btn" href="#">Commander</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-3" style="max-width: 520px;">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="img/delicious_4.jpg" alt="gateaux" >
+                </div>
+                <div class="col-md-6">
+                  <div class="card-body">
+                    <h5 class="card-title">Fast Food</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eaque cupiditate eos dignissimos.</p>
+                    <a class="btn" href="#">Commander</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+        
+        <section id="galerie" class="row">
+            <!--titre + ss titre + galerie-->
+            <div class="title text-center mt-5 mb-5">
+                <h3>Nos Plats</h3>
+                <h4>Lorem ipsum dolor amet edit.</h4>
+            </div>
+            <div class="container-fluid">
+               <div class="d-flex flex-wrap">
+                  <img src="img/1.jpg" alt="1">
+
+                  <img src="img/2.jpg" alt="2">
+
+                  <img src="img/3.jpg" alt="3">
+
+                  <img src="img/4.jpg" alt="4">
+
+                  <img src="img/5.jpg" alt="5">
+
+                  <img src="img/6.jpg" alt="6">
+
+                  <img src="img/7.jpg" alt="7">
+
+                  <img src="img/8.jpg" alt="8">
+
+              </div>
+            </div>
+           
+        </section>
+        <section id="equipe" class="row mb-5">
+            <!--titre + ss titre + images equipe-->
+            <div class="title text-center mt-5 mb-3">
+                <h3>Notre équipe</h3>
+                <h4>Lorem ipsum dolor amet.</h4>
+            </div>
+                <div class="text-center d-flex justify-content-center">
+                  <figure>
+                    <img src="img/chef-1.jpg" alt="chef1">
+                    <figcaption>
+                      <h5>Absolium Supra</h5>
+                      <p>Absolium supra dictos</p>
+                    </figcaption>
+                  </figure>
+                  <figure>
+                    <img src="img/chef-2.jpg" alt="chef2">
+                    <figcaption>
+                      <h5>Absolium Supra</h5>
+                      <p>Absolium supra dictos</p>
+                    </figcaption>
+                  </figure>
+                  <figure>
+                    <img src="img/chef-3.jpg" alt="chef3">
+                    <figcaption>
+                      <h5>Absolium Supra</h5>
+                      <p>Absolium supra dictos</p>
+                    </figcaption>
+                  </figure>
+                </div>
+            
+        </section>
+        <section id="separateur" class="row">
+            <!-- background overlay + titre oversize -->
+            <div class="d-flex overlay align-items-center justify-content-center">
+              <h6 class="h1">Interpella paucis.</h6>
+            </div>
+            
+        </section>
+        <section id="reservation" class="row mb-5">
+            <!--titre + ss titre + form date -->
+            <div class="title text-center mt-5">
+                <h3>Réservation</h3>
+                <h4>Service adapté à vos envies</h4>
+            </div>
+                <form class="mt-5 mb-4">
+                  <div class="form row d-flex justify-content-center">
+                    <div class="col-auto d-flex align-items-baseline">
+                      <label class="sr-only" for="inlineFormInput">Date</label>
+                      <i class="far fa-calendar-alt"></i>
+                      <input type="date" class="form-control mb-2" id="date">
+                    </div>
+                    <div class="col-auto d-flex align-items-baseline">
+                      <i class="far fa-clock"></i>
+                      <select class="custom-select form-control mb-2">
+                        <option selected value="heure12">12:00</option>
+                        <option value="heure1230">12:30</option>
+                        <option value="heure19">19:00</option>
+                        <option value="heure1930">19:30</option>
+                        <option value="heure20">20:00</option>
+                        <option value="heure2030">20:30</option>
+                        <option value="heure21">21:00</option>
+                        <option value="heure2130">21:30</option>
+                      </select>
+                    </div>
+                    <div class="col-auto d-flex align-items-baseline">
+                      <i class="fas fa-users"></i>
+                      <select class="custom-select form-control mb-2">
+                        <option value="1">1 invité</option>
+                        <option selected value="1">2 invités</option>
+                        <option value="2">3 invités</option>
+                        <option value="3">4 invités</option>
+                      </select>
+                    </div>
+                    </div>
+                    <div class="text-center mt-4">
+                      <button type="submit" class="btn">Réserver</button>
+                    </div>
+                  </div>
+                </form>
+            </div>
+        </section>
+        <section id="quotes" class="row mb-5 text-center align-items-center justify-content-center">
+            <!-- blockquote carousel + image + background uni-->
+            <div id="carousel" class="carousel slide col-10" data-bs-ride="carousel">
+              <div class="carousel-inner d-flex">
+                <div class="carousel-item active">
+                <img src="img/chef-thumb.jpg" class="d-block" alt="chef">
+                  <blockquote  class="d-block">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum iusto est cum exercitationem eaque fuga nisi et nulla natus possimus veniam aperiam repudiandae, blanditiis, dolore quaerat excepturi. Est, maiores doloremque.<p>RAPHAEL QUIN</p></blockquote>
+                </div>
+                <div class="carousel-item">
+                  <img src="img/chef-thumb.jpg" class="d-block" alt="chef">
+                  <blockquote class="d-block"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum iusto est cum exercitationem eaque fuga nisi et nulla natus possimus veniam aperiam repudiandae, blanditiis, dolore quaerat excepturi. Est, maiores doloremque.</p>
+                  <p>RAPHAEL QUIN</p></blockquote>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+        </section>
+        <section id="blog" class="row mb-5 align-items-center justify-content-center">
+            <!--titre + ss titre + articles card-->
+            <div class="row d-flex justify-content-center">
+            <div class="title text-center col-md-8 mt-5 mb-5">
+                <h3>Notre Blog</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eligendi possimus molestiae iste maiores cupiditate quibusdam corporis voluptatum excepturi dolores ipsam nostrum cumque ex eum in, odio harum. Corrupti, incidunt!<p>
+            </div>
+          </div>
+            <article class="col-3">
+              <div class="card">
+                <img src="img/news-1.jpg" class="card-img-top" alt="news-1">
+                <div class="card-body">
+                  <h5 class="card-title">Lorem Ipsum</h5>
+                  <small><p class="card-text">10 juin 2020 by Peter Parker</p></small>
+                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, cupiditate fuga. Totam, soluta laborum sequi quae modi eaque veniam? Atque, voluptatibus voluptates id ipsum recusandae sequi doloremque odit dolor et. </p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                  <small><a href="#">+ Détails</a></small>
+                  <small>10 likes</small>
+                </div>
+            </article>
+            <article class="col-3">
+              <div class="card">
+                <img src="img/news-2.jpg" class="card-img-top" alt="news-2">
+                <div class="card-body">
+                  <h5 class="card-title">Lorem Ipsum</h5>
+                  <small><p class="card-text">10 juin 2020 by Peter Parker</p></small>
+                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, cupiditate fuga. Totam, soluta laborum sequi quae modi eaque veniam? Atque, voluptatibus voluptates id ipsum recusandae sequi doloremque odit dolor et.</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                  <small><a href="#">+ Détails</a></small>
+                  <small>10 likes</small>
+                </div>
+            </article>
+            <article class="col-3">
+              <div class="card">
+                <img src="img/news-3.jpg" class="card-img-top" alt="news-3">
+                <div class="card-body">
+                  <h5 class="card-title">Lorem Ipsum</h5>
+                  <small><p class="card-text">10 juin 2020 by Peter Parker</p></small>
+                  <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa eos quae nulla itaque, dolorem autem similique necessitatibus ut nostrum doloremque facere illum assumenda, ipsa deserunt perferendis id ea sequi placeat..</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                  <small><a href="#">+ Détails</a></small>
+                  <small>10 likes</small>
+                </div>
+            </article>
+            
+        </section>
+        <section id="footerLinks" class="row">
+            <!-- 4 col avec links + menu en dessous-->
+            <div class="d-flex justify-content-around">
+              <div>
+                <h5>Informations</h5>
+                <div class="img-separation"><img src="img/separater.png" alt="separateur"></div>
+                <ul>
+                  <li><i class="fas fa-long-arrow-alt-right"></i><a href="#"> Lien 1</a></li>
+                  <li><i class="fas fa-long-arrow-alt-right"></i><a href="#"> Lien 2</a></li>
+                  <li><i class="fas fa-long-arrow-alt-right"></i><a href="#"> Lien 3</a></li>
+                  <li><i class="fas fa-long-arrow-alt-right"></i><a href="#"> Lien 4</a></li>
+                  <li><i class="fas fa-long-arrow-alt-right"></i><a href="#"> Lien 5</a></li>
+                  <li><i class="fas fa-long-arrow-alt-right"></i><a href="#"> Lien 6</a></li>
+                </ul>
+              </div>
+              <div>
+                <h5>Nos services</h5>
+                <div class="img-separation"><img src="img/separater.png" alt="separateur"></div>
+                <ul>
+                  <li><i class="fas fa-long-arrow-alt-right"></i><a href="#"> Lien 1</a></li>
+                  <li><i class="fas fa-long-arrow-alt-right"></i><a href="#"> Lien 2</a></li>
+                  <li><i class="fas fa-long-arrow-alt-right"></i><a href="#"> Lien 3</a></li>
+                  <li><i class="fas fa-long-arrow-alt-right"></i><a href="#"> Lien 4</a></li>
+                  <li><i class="fas fa-long-arrow-alt-right"></i><a href="#"> Lien 5</a></li>
+                  <li><i class="fas fa-long-arrow-alt-right"></i><a href="#"> Lien 6</a></li>
+                </ul>
+              </div>
+              <div>
+                <h5>Contactez-Nous</h5>
+                <div class="img-separation"><img src="img/separater.png" alt="separateur"></div>
+                  <div class="contact">
+                    <p>Email:</p>
+                    <p><a href="mailto:contact@shangrila.com"><i class="far fa-envelope"></i> contact@shangrila.com</a></p>
+                  </div>
+                  <div class="contact">
+                    <p>Téléphone:</p>
+                    <p><a href="tel:01.23.45.67.89"><i class="fas fa-phone-alt"></i> 01.23.45.67.89</a></p>
+                  </div>
+                  <div class="contact">
+                    <p>Adresse:</p>
+                    <p>5 rue du Restaurant <br>31300 Toulouse</p>
+                  </div>
+              </div>
+              <div>
+                <h5>Réseaux sociaux</h5>
+                <div class="img-separation"><img src="img/separater.png" alt="separateur"></div>
+                  <ul>
+                    <li><i class="fab fa-facebook-f"></i><a href="#">Facebook</a></li>
+                    <li><i class="fab fa-twitter"></i><a href="#">Twitter</a></li>
+                    <li><i class="fab fa-linkedin-in"></i><a href="#">Linkedin</a></li>
+                    <li><i class="fab fa-pinterest-p"></i><a href="#">Pinterest</a></li>
+                    <li><i class="fas fa-rss"></i><a href="#">RSS Feed</a></li>
+                  </ul>
+              </div>
+            </div>
+            
+        </section>
+
+{% endblock %}

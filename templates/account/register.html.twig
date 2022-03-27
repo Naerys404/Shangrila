@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}{{title}}{% endblock %}
+
+{% block body %}
+
+    <div class="position-relative">{% include 'inc/nav-header.html.twig' %}</div>
+
+    <section class="container-fluid register">
+        <div class="row justify-content-center">
+          
+            <div class="col-md-6 jumbotron">
+                <h2>Inscription</h2>
+
+                {{form_start(form)}}
+                    {{form_start(addressForm)}}
+                            
+                    <div class='mb-2 mt-4'>
+                        {{form_widget(form)}}
+                    </div>
+                     <div class='mb-2'>
+                        {{form_widget(addressForm)}}
+                    </div>      
+
+                    <button type="submit" class="btn btn-brown">S'inscrire</button>
+                   
+                   {{form_end(addressForm)}}
+                   
+                {{form_end(form)}}
+                    
+
+            </div>            
+        </div>
+    
+    </section>
+
+   
+
+
+{% endblock %}

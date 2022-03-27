@@ -1,0 +1,300 @@
+:root {
+    --marron:#9e7540;
+}
+
+/* GENERAL */
+body {
+    background:#fff;
+}
+main {
+    margin:0;
+    padding:0 ! important;
+}
+.bg-marron
+{
+    background-color:var(--marron);
+}
+.bg-noir {
+    background-color: #000;
+}
+.bg-noir i {
+    color:var(--marron);
+}
+.btn-brown {
+    background-color: var(--marron);
+    color:#fff;
+}
+h1 {
+    color:var(--marron);
+}
+.navbar {
+    padding:0;
+}
+.title h4 {
+    color:var(--marron);
+    font-size:1.2em;
+}
+.title p {
+    color:var(--marron);
+}
+a {
+    text-decoration:none;
+}
+                        /* HOMEPAGE */
+/* HEADER */
+header {
+     background:var(--marron);
+     color:#fff;
+     height:100%;
+    }
+header div.bg-marron p, header div.bg-noir p
+{
+    margin:0 1em;
+}
+.nav i {
+    color:var(--marron);
+}
+header .nav-link {
+    color:#fff;
+}
+header .nav-link:hover {
+    color:var(--marron);
+}
+header a, header a:hover {
+    color:#fff;
+}
+
+a.nav-link.active {
+    color:var(--marron) !important;
+    font-weight:600;
+}
+
+/* NAV MENU */
+#navMenu {
+    background:#fff;
+    padding-bottom:1em;
+    padding-top:1.5em;
+}
+.main-logo {
+    padding-left:20%;
+}
+.nav-header {
+    background-color: rgba(255,255,255,0.85);
+    position: sticky;
+    top:0;
+}
+.nav-header a {
+    color: #000;
+}
+
+
+/* PRESENTATION*/
+#presentation {
+    background:url("../img/image-1.jpg") no-repeat 0 0 #000;
+    height:40em;
+}
+#presentation p {
+    color:#fff;
+}
+#presentation .col {
+    margin-top:5em;
+}
+#presentation .btn {
+    background-color: var(--marron);
+    color:#fff;
+    padding: 0.5em 2em;
+    border-radius:0%;
+    margin: 2em auto;
+}
+#presentation nav {
+    background-color: rgba(255,255,255,0.7);
+    margin-bottom:4em;
+    height:5em;
+}
+#presentation .nav-link {
+    color:#000;
+}
+#presentation .nav-link.active{
+    color:#fff !important;
+    background-color:var(--marron);
+}
+
+/* MENU */
+#menu .card {
+    border:none;
+}
+#menu .btn{
+    border:1px solid var(--marron);
+    color:var(--marron);
+}
+
+#menu .card-body {
+    padding-top:0;
+    padding-left:2em;
+}
+#menu p.card-text {
+    font-size:0.9em;
+    
+}
+/*GALERIE*/
+#galerie img {
+    margin:0;
+    padding:0;
+    width:25%;
+    flex-shrink: 1;
+}
+#galerie .container-fluid {
+    padding:0;
+    margin:0;
+}
+#galerie img:hover {
+    -webkit-filter: sepia(100%); /* Safari 6.0 - 9.0 */
+    filter:sepia(100%);
+}
+/*EQUIPE*/
+
+#equipe img {
+    border-radius:50%;
+    margin: 2em;
+}
+#equipe p {
+    color:var(--marron);
+}
+/*SEPARATEUR*/
+#separateur {
+    background:url("../img/fond2.jpg") no-repeat fixed 0 0 #000;
+    height:380px;
+    
+}
+#separateur .overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+    height:100%;
+}
+#separateur .h1 {
+    color:#fff;
+    border-top:2px solid #fff;
+    border-bottom:2px solid #fff;
+    text-transform: uppercase;
+    font-size:4em;
+    padding:0.5em;
+}
+/*RESERVATION*/
+#reservation .btn {
+    background-color: var(--marron);
+    color:#fff;
+    border-radius:0;
+    padding:0.5em 2em;
+}
+#reservation i {
+    padding:0 1em;
+}
+/*QUOTES*/
+#quotes {
+    background:var(--marron);
+    height:350px;}
+#quotes .carousel-item img {
+    width:5em;
+    border-radius:50%;
+    margin:3em auto;  
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    position:absolute;
+    top:5em;
+}
+
+#quotes #carousel {
+    color:#fff;
+    height: 100%;
+}
+#quotes .carousel-inner {
+    height: 100%;
+}
+
+/*BLOG*/
+#blog .card-body {
+    padding:1em;
+}
+small .card-text {
+    color:#666;
+    padding-bottom:0.5em;
+}
+#blog .card {
+    border:1px solid transparent;
+}
+#blog p.card-text {
+    font-size:0.9em;
+}
+#blog .card-footer a{
+    color: #000;
+}
+#blog .card-footer {
+    background-color:#fff;
+}
+
+/*FOOTERLINKS*/
+#footerLinks {
+    background:#000;
+    color:#fff;
+}
+#footerLinks h5 {
+    text-align: center;
+    font-size:1.5em;
+    margin-top:2em;
+}
+#footerLinks a {
+    color:#fff;
+    text-decoration:none;
+}
+#footerLinks ul {
+    list-style:none;
+}
+#footerLinks ul li {
+    margin:0.5em 0;
+}
+#footerLinks i {
+    padding-right:0.5em;
+}
+#footerLinks div.contact p:first-child {
+    color:var(--marron);
+}
+/* NAV - FOOTER */
+nav.nav-footer {
+    background-color:#000;
+}
+nav.nav-footer a {
+    color: #fff;
+}
+
+/*FOOTER*/
+footer {
+    background:#000;
+    color:#fff;
+    
+}
+footer p {
+    margin-left:5em;
+}
+
+                /* LOGIN */
+section.login {
+    background: url("/img/table-dark.jpg") no-repeat fixed 0 0 #000;
+    
+}
+.form-group input{
+    border-color: #A4A9AE !important;
+}
+.jumbotron {
+    padding: 5em;
+    margin-bottom: 4em;
+    margin-top: 5em;
+    border-radius: 3px;
+    background-color:#fff;
+    
+}
+                 /* REGISTER */
+
+section.register {
+    background: url("/img/table-dark.jpg") no-repeat scroll #000;
+}
+
