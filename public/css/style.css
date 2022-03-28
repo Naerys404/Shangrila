@@ -295,6 +295,6 @@ section.login {
                  /* REGISTER */
 
 section.register {
-    background: url("/img/table-dark.jpg") no-repeat scroll #000;
+    background: url("/img/table-dark.jpg") no-repeat fixed #000;
 }
 

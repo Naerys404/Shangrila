@@ -16,15 +16,30 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {   
+        //profil Admin
+        $adminUser = new User();
+        $adminUser->setFirstname('Naerys')
+        ->setLastname('admin')
+        ->setEmail("Naerys@test.com")
+        ->setPassword($this->hasher->hashPassword($adminUser, 'testtest'))
+        ->setAddress("17 place des coquelicots")
+        ->setPostalCode("31330")
+        ->setCity("Larra")
+        ->setRoles(['ROLE_ADMIN']);
+
+        $manager->persist($adminUser);
+
+
+        //profil User
         $user = new User();
         $hashedPassword = $this->hasher->hashPassword($user, "testtest");
         $user->setFirstname("Leona")
             ->setLastname("Dupont")
-            ->setEmail('leona@test.com')
+            ->setEmail("leona@test.com")
             ->setPassword($hashedPassword)
             ->setAddress("3 rue des Mésanges")
             ->setPostalCode("33100")
-            ->setCity('Toulouse');
+            ->setCity("Toulouse");
 
     $manager->persist($user);
     $manager->flush();        
