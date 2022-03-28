@@ -1,7 +1,9 @@
 :root {
     --marron:#9e7540;
 }
-
+.brown {
+    color:var(--marron);
+}
 /* GENERAL */
 body {
     background:#fff;
@@ -298,3 +300,13 @@ section.register {
     background: url("/img/table-dark.jpg") no-repeat fixed #000;
 }
 
+                    /* PROFILE*/
+section.profile {
+    background: url("/img/fond2.jpg") no-repeat fixed #000;
+}
+section.profile table th {
+    margin-bottom:1em;
+}
+section.profile table th {
+    padding:0.5em;
+}

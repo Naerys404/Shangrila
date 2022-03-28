@@ -11,12 +11,23 @@
                 <p><a href="mailto:contact@shangrila.com"><i class="far fa-envelope"></i> contact@shangrila.com</a></p>
             </div>
             <ul class="nav col d-flex bg-noir">
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="{{path('account_login')}}"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{path('account_register')}}"><i class="far fa-edit"></i> S'inscrire</a>
-                  </li>
+
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{path('account_home')}}"><i class="fa-regular fa-user"></i> Mon compte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{path('account_logout')}}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
+                    </li>
+
+                {% else %}
+                    <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{path('account_login')}}"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('account_register')}}"><i class="far fa-edit"></i> S'inscrire</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="img/lang.jpg" alt="french flag"> FR</a>
                   <ul class="dropdown-menu">

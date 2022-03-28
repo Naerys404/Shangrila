@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class RegisterType extends ApplicationType
@@ -20,6 +21,9 @@ class RegisterType extends ApplicationType
             ->add('email', EmailType::class,  $this->getConfig('Email', 'Renseignez un email valide'))
             ->add('password', PasswordType::class,  $this->getConfig('Mot de passe', 'Choisissez un mot de passe'))
             ->add('confirmPassword', PasswordType::class,  $this->getConfig('Confirmation du mot de passe', 'Confirmez votre mot de passe'))
+            ->add('address', TextType::class, $this->getConfig('Adresse postale', 'Numéro et nom de la voie'))
+            ->add('postalCode', NumberType::class, $this->getConfig('Code postal', 'Votre code postal'))
+            ->add('city', TextType::class, $this->getConfig('Ville', 'Votre ville'))
         ;
     }
 

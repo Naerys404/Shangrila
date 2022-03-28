@@ -61,8 +61,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\PrePersist]
     public function prePersist(){
           if(empty($this->createdAt)){
-                $this->createdAt = new \DateTime();
+                $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
           } 
+    }
+
+    public function getFullname(){
+        return "{$this->firstname} {$this->lastname}";
+    }
+
+    public function getFulladdress(){
+        return "{$this->address}<br>{$this->postalCode}<br>{$this->city}";
     }
 
     public function getId(): ?int

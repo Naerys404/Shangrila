@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\AddressType;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,25 +16,27 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AccountController extends AbstractController
 {
+    //CONNEXION
     #[Route('/login', name:'account_login')]
     public function login(AuthenticationUtils $authenticationUtils):Response{
-        //Affiche l'erreur si il y en a une, ou la dernière erreur de la liste
+
         $error = $authenticationUtils->getLastAuthenticationError();
 
         $lastUsername = $authenticationUtils->getLastUsername();
         
-
         return $this->render('account/login.html.twig', [
             'title' => 'Restaurant Shangrila | Connexion', 'last_username'=>$lastUsername, 'error'=> $error
         ]);
 
     }
 
+    //DECONNEXION
     #[Route('/logout', name:'account_logout')]
     public function logout(){
 
     }
 
+    //INSCRIPTION
     #[Route('/register', name:'account_register')]
     public function register(Request $request, UserPasswordHasherInterface $hasher, EntityManagerInterface $manager){
         $user = new User();
@@ -41,10 +44,8 @@ class AccountController extends AbstractController
         $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
 
-        $addressForm = $this->createForm(AddressType::class, $user);
-        $addressForm->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid() && $addressForm->isSubmitted() && $addressForm->isValid()  ){
+     
+        if($form->isSubmitted() && $form->isValid()){
 
             //hash du mdp
             $hash = $hasher->hashPassword($user, $user->getPassword());
@@ -60,15 +61,17 @@ class AccountController extends AbstractController
 
         }
 
-        return $this->render('account/register.html.twig', ['title'=>'Restaurant Shangrila | Inscription', 'form'=>$form->createView(), 'addressForm'=>$addressForm->createView()]);
+        return $this->render('account/register.html.twig', ['title'=>'Restaurant Shangrila | Inscription', 'form'=>$form->createView()]);
     }
 
-    #[Route('/account', name: 'account_home')]
+    //PROFIL DE L'USER (connecté uniquement)
+    #[Route('/profile', name: 'account_home')]
+    #[IsGranted("ROLE_USER")]
     public function myAccount(): Response
     {
 
         return $this->render('account/profile.html.twig', [
-            'title' => 'Restaurant Shangrila | Mon compte',
+            'title' => 'Restaurant Shangrila | Mon compte', 'user' => $this->getUser()
         ]);
     }
 }
