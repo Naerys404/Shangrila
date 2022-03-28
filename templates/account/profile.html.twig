@@ -23,15 +23,15 @@
                         <div class="col row">
                             <h4 class="mb-4">Mes informations personnelles</h4> 
                             <div class="col">
-                                <p><strong>Mon nom: </strong> <br> {{user.fullname}}</p>
-                                <p><strong>Mon adresse mail: </strong><br> {{user.email}}</p>
+                                <p><strong>Nom: </strong> <br> {{user.fullname}}</p>
+                                <p><strong>Adresse mail: </strong><br> {{user.email}}</p>
                             </div>
                             <div class="col">
-                                <p><strong>Mon adresse postale: </strong><br> {{user.fulladdress|raw}}</p>
+                                <p><strong>Adresse postale: </strong><br> {{user.fulladdress|raw}}</p>
                             </div>
                             <div class="d-inline-block mt-3">
-                                    <a class="btn btn-brown" href="#">Modifier mes informations</a>  
-                                    <a class="btn btn-secondary" href="#">Modifier mon mot de passe</a>
+                                    <a class="btn btn-brown" href="{{path('account_update')}}">Modifier mes informations</a>  
+                                    <a class="btn btn-secondary" href="{{path('password_update')}}">Modifier mon mot de passe</a>
                             </div>
                         </div>
 

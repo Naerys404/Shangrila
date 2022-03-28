@@ -1,0 +1,33 @@
+{% extends './base.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+
+{% block body %}
+
+    <div class="position-relative">{% include './inc/nav-header.html.twig' %}</div>
+   
+    <section class="container-fluid accountUpdate">
+
+     {% include './inc/flashs.html.twig' %}
+     
+        <div class="row justify-content-center">
+          
+            <div class="col-md-8 jumbotron">
+                <h1 class="h2">Modification de vos informations personnelles</h1>
+
+                {{form_start(form)}}
+                            
+                        {{form_widget(form)}}
+
+                    <button type="submit" class="btn btn-brown">Enregistrer</button>
+                     <a href="{{path("account_home")}}" class="btn btn-secondary">Retour</a>
+                   
+                {{form_end(form)}}
+
+            </div>            
+        </div>
+    
+    </section>
+
+{% endblock %}

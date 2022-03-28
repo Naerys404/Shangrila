@@ -7,6 +7,8 @@
 /* GENERAL */
 body {
     background:#fff;
+    height:100%;
+    width: 100%;
 }
 main {
     margin:0;
@@ -280,7 +282,7 @@ footer p {
 
                 /* LOGIN */
 section.login {
-    background: url("/img/table-dark.jpg") no-repeat fixed 0 0 #000;
+    background: url("../img/table-dark.jpg") no-repeat fixed 0 0 #000;
     
 }
 .form-group input{
@@ -297,16 +299,21 @@ section.login {
                  /* REGISTER */
 
 section.register {
-    background: url("/img/table-dark.jpg") no-repeat fixed #000;
+    background: url("../img/table-dark.jpg") no-repeat fixed #000;
 }
 
                     /* PROFILE*/
 section.profile {
-    background: url("/img/fond2.jpg") no-repeat fixed #000;
+    background: url("../img/fond2.jpg") no-repeat fixed #000;
 }
 section.profile table th {
     margin-bottom:1em;
 }
 section.profile table th {
     padding:0.5em;
+}
+                 /* ACCOUNT UPDATE*/
+
+section.accountUpdate {
+    background: url("../img/image-1.jpg") no-repeat fixed #000;
 }

@@ -33,13 +33,13 @@ class AppFixtures extends Fixture
         //profil User
         $user = new User();
         $hashedPassword = $this->hasher->hashPassword($user, "testtest");
-        $user->setFirstname("Leona")
-            ->setLastname("Dupont")
-            ->setEmail("leona@test.com")
+        $user->setFirstname("Jinx")
+            ->setLastname("Powder")
+            ->setEmail("jinx@test.com")
             ->setPassword($hashedPassword)
-            ->setAddress("3 rue des Mésanges")
-            ->setPostalCode("33100")
-            ->setCity("Toulouse");
+            ->setAddress("3 rue des poros")
+            ->setPostalCode("99999")
+            ->setCity("Piltover");
 
     $manager->persist($user);
     $manager->flush();        

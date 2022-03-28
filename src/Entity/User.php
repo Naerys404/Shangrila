@@ -7,8 +7,6 @@ use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Mime\Message;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
@@ -40,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Assert\Length(min:8, minMessage:'Votre mot de passe doit comporter au moins 8 caractères.')]
     #[ORM\Column(type: 'string', length: 255)]
-    private $password;
+    private $hash;
 
     #[Assert\EqualTo(propertyPath:"password", message:"Les deux mots de passe ne correspondent pas.")]
     public $confirmPassword;
@@ -126,14 +124,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getHash(): ?string
     {
-        return $this->password;
+        return $this->hash;
     }
 
-    public function setPassword(string $password): self
+    public function setHash(string $hash): self
     {
-        $this->password = $password;
+        $this->hash = $hash;
 
         return $this;
     }
@@ -150,7 +148,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->roles = $roles;
         return $this;
     }
+    
+    //requis par PasswordAuthenticatedUserInterface
+    public function getPassword(): string
+        {
+            return $this->hash;
+        }
+    
+        public function setPassword(string $hash): self
+        {
+              $this->hash = $hash;
+              return $this;
+        }
 
+    //requis par UserInterface
     public function getSalt(){
         return null;
     }
