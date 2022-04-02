@@ -39,8 +39,8 @@ class TableBookingController extends AbstractController
 
     //page de confirmation de la réservation de la table
     #[Route('/booking/table/confirmation/{id}', name:'table_booking_confirmation')]
+    #[IsGranted("ROLE_USER")]
     public function show(TableBooking $tableBooking):Response{
-
 
         return $this->render('tableBooking/show.html.twig', ["title"=>"Restaurant Shangrila | Confirmation de la réservation", 'tableBooking'=>$tableBooking]);
     }

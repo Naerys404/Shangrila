@@ -87,8 +87,8 @@ a.nav-link.active {
     position: sticky;
     top:0;
 }
-.nav-header a {
-    color: #000;
+.nav-header a.nav-link {
+    color:rgba(0, 0, 0, 0.6);
 }
 
 
@@ -312,6 +312,7 @@ section.profile table th {
 section.profile table th {
     padding:0.5em;
 }
+
                  /* ACCOUNT UPDATE*/
 
 section.accountUpdate {

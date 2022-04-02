@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\AccountType;
 use App\Form\RegisterType;
+use App\Entity\TableBooking;
 use App\Entity\PasswordUpdate;
 use App\Form\PasswordUpdateType;
+use App\Repository\TableBookingRepository;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,11 +73,13 @@ class AccountController extends AbstractController
     //PROFIL DE L'USER (connecté uniquement)
     #[Route('/profile', name: 'account_home')]
     #[IsGranted("ROLE_USER")]
-    public function myAccount(): Response
+    public function myAccount(TableBookingRepository $repo): Response
     {
+        //récupération des résa de tables de l'user par date  
+        $tableBookings = $repo->findBy([], ['date'=>'DESC'],6, null );
 
         return $this->render('account/profile.html.twig', [
-            'title' => 'Restaurant Shangrila | Mon compte', 'user' => $this->getUser()
+            'title' => 'Restaurant Shangrila | Mon compte', 'user' => $this->getUser(), 'tableBookings'=>$tableBookings
         ]);
     }
 

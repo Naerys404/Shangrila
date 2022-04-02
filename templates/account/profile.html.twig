@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    {% include './inc/nav-header.html.twig'%}
+    <div class="position-relative">{% include '/inc/nav-header.html.twig'%}</div>
 
     <section class="container-fluid profile">
 
@@ -36,10 +36,54 @@
                         </div>
 
                         <div class="col">
-                            <h4 class="mb-4">Historique de mes commandes</h4>
-                            <div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi provident eaque dolor laborum. Illo alias asperiores, tempore totam labore dolore laudantium possimus minima debitis, ratione sapiente corrupti amet fugiat qui?</p>
+                          
+                                <h4 class="mb-4">Historique de mes réservations</h4>
+                                <div class="row">
+                                <hr>
+                                
+                                    {% for tableBooking in tableBookings %}
+                                        <div class="d-flex align-items-baseline justify-content-around">
+                                            <div class="flex-grow-2">
+                                                <p class="card-title">Réservation n°{% if tableBooking.id < 10 %}0{{tableBooking.id}}{% else %}{{tableBooking.id}}{% endif %}</p>
+                                            </div>
+                                            <div>
+                                                <h6 class="card-subtitle text-muted"><i class="far fa-calendar-alt"></i> {{tableBooking.date|date("d/m/Y")}}</h6>
+                                            </div>
+                                            <div>
+                                                <p class="card-text"><i class="far fa-clock"></i> {{tableBooking.timeSheet}}</p>
+                                            </div>
+                                            <div>
+                                                <p class="card-text"><i class="fas fa-users"></i> {{tableBooking.guests}}</p>
+                                            </div>                
+                                        </div>
+                                        <hr> 
+                                    {% endfor %}
+                        
+                                </div>
+                                
                             </div>
+                            <hr class="brown mt-3">
+                            <h4 class="mb-4">Historique de mes commandes</h4>
+                               
+                                <div class="card" style="width: 18rem;">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">An item</li>
+                                        <li class="list-group-item">A second item</li>
+                                        <li class="list-group-item">A third item</li>
+                                    </ul>
+                                    <div class="card-body">
+                                        <a href="#" class="card-link">Card link</a>
+                                        <a href="#" class="card-link">Another link</a>
+                                    </div>
+                                </div>
+                                
+                            
+
                         </div>
                     </div>
                 </div>
