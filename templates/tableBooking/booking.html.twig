@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block body %}
+    <div class="position-relative">{% include 'inc/nav-header.html.twig' %}</div>
+   
+    <section class="container-fluid tableBooking">
+
+     {% include './inc/flashs.html.twig' %}
+     
+        <div class="row justify-content-center">
+          
+            <div class="col-md-6 jumbotron">
+                <h1 class="h2 mb-3">Réserver une table</h1>
+
+                {{ form_start(form) }}
+
+                    <div class="form-group mb-3">
+                        <i class="far fa-calendar-alt"></i>
+                        {{form_label(form.date)}}
+                        {{form_widget(form.date)}}
+                    
+                    </div>
+                      
+                     <div class="form-group mb-3">
+                        <i class="far fa-clock"></i>
+                        {{form_label(form.timeSheet)}}
+                        {{form_widget(form.timeSheet)}}
+                    </div>
+
+                    <div class="form-group mb-3">
+                       <i class="fas fa-users"></i>
+                        {{form_label(form.guests)}}
+                        {{form_widget(form.guests)}}
+                    </div>
+
+                    <button type="submit" class="btn btn-brown"> Réserver </button>   
+
+                {{ form_end(form) }}
+                    
+
+            </div>            
+        </div>
+    
+    </section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block body %}
+
+   <div class="position-relative">{% include 'inc/nav-header.html.twig' %}</div>
+   
+    <section class="container-fluid about">
+     
+        <div class="row justify-content-center">
+          
+            <div class="jumbotron col-md-6">
+                <h1 class="h2">A propos</h1>
+                <hr class="brown">
+                <div class="text-center">
+                    <img src="./img/logo.png" alt="logo">
+                    <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam minima odio natus inventore veniam dolore. Id quaerat accusantium iusto distinctio neque praesentium? Aspernatur adipisci vero nisi quo quas ea iure!</p>
+                    <p>Fusce commodo condimentum efficitur. Curabitur ligula est, maximus a mauris et, euismod semper metus. In et sapien quam. Vivamus a tellus eu diam condimentum semper. Phasellus at lacinia sapien. Donec feugiat, tellus sed elementum cursus, purus arcu pulvinar purus, a lacinia turpis diam nec sapien. Aenean turpis est, cursus eu faucibus a, venenatis quis metus. Nunc vitae ipsum sit amet justo viverra iaculis vitae a lectus. Nulla sodales, turpis eu dapibus rhoncus, neque felis tempus augue, quis elementum arcu quam ornare risus. Suspendisse dapibus urna bibendum nisi maximus convallis. </p>
+                </div>
+
+                    
+
+            </div>            
+        </div>
+    
+    </section>
+
+{% endblock %}

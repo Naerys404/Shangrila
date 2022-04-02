@@ -317,3 +317,14 @@ section.profile table th {
 section.accountUpdate {
     background: url("../img/image-1.jpg") no-repeat fixed #000;
 }
+
+                /* ABOUT */
+
+section.about {
+    background: url("../img/bar-dark.jpg") no-repeat fixed #000;
+}
+
+                /* TABLEBOOKING */
+section.tableBooking {
+    background: url("../img/bar-dark.jpg") no-repeat fixed #000;
+}

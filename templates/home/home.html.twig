@@ -18,10 +18,10 @@
                         <a class="nav-link active" aria-current="page" href="{{path('homePage')}}">Accueil</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">A propos</a>
+                        <a class="nav-link" href="{{path('aboutPage')}}">A propos</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Reservation</a>
+                        <a class="nav-link" href="{{path('table_booking')}}">Reservation</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="#">Menu</a>
@@ -202,40 +202,39 @@
                 <h3>Réservation</h3>
                 <h4>Service adapté à vos envies</h4>
             </div>
+                {{form_start(form)}}
                 <form class="mt-5 mb-4">
                   <div class="form row d-flex justify-content-center">
+                  
                     <div class="col-auto d-flex align-items-baseline">
-                      <label class="sr-only" for="inlineFormInput">Date</label>
-                      <i class="far fa-calendar-alt"></i>
-                      <input type="date" class="form-control mb-2" id="date">
-                    </div>
-                    <div class="col-auto d-flex align-items-baseline">
-                      <i class="far fa-clock"></i>
-                      <select class="custom-select form-control mb-2">
-                        <option selected value="heure12">12:00</option>
-                        <option value="heure1230">12:30</option>
-                        <option value="heure19">19:00</option>
-                        <option value="heure1930">19:30</option>
-                        <option value="heure20">20:00</option>
-                        <option value="heure2030">20:30</option>
-                        <option value="heure21">21:00</option>
-                        <option value="heure2130">21:30</option>
-                      </select>
+                            <i class="far fa-calendar-alt"></i>
+                        {{form_widget(form.date)}}
                     </div>
                     <div class="col-auto d-flex align-items-baseline">
-                      <i class="fas fa-users"></i>
-                      <select class="custom-select form-control mb-2">
-                        <option value="1">1 invité</option>
-                        <option selected value="1">2 invités</option>
-                        <option value="2">3 invités</option>
-                        <option value="3">4 invités</option>
-                      </select>
+                            <i class="far fa-clock"></i>
+                       {{form_widget(form.timeSheet)}}
+                    </div>
+                    <div class="col-auto d-flex align-items-baseline">
+                      
+                            <i class="fas fa-users"></i>
+                       {{form_widget(form.guests)}}
                     </div>
                     </div>
-                    <div class="text-center mt-4">
-                      <button type="submit" class="btn">Réserver</button>
-                    </div>
+
+                    <!-- si l'utilisateur est connecté-->
+                    {% if app.user %}
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn">Réserver</button>
+                        </div>
+                    {% else %}
+                        <div class="text-center mt-4">
+                            <strong><p>Veuillez vous connecter pour réserver une table</p></strong>
+                            <a href="{{path('account_login')}}" class="btn btn-brown">Se connecter</a>
+                        </div>
+                    {% endif %}
+
                   </div>
+                {{form_end(form)}}
                 </form>
             </div>
         </section>

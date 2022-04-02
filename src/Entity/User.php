@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -55,6 +57,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $city;
+
+    #[ORM\OneToMany(mappedBy: 'booker', targetEntity: TableBooking::class)]
+    private $tableBookings;
+
+    public function __construct()
+    {
+        $this->tableBookings = new ArrayCollection();
+    }
 
     #[ORM\PrePersist]
     public function prePersist(){
@@ -148,29 +158,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->roles = $roles;
         return $this;
     }
-    
-    //requis par PasswordAuthenticatedUserInterface
-    public function getPassword(): string
-        {
-            return $this->hash;
-        }
-    
-        public function setPassword(string $hash): self
-        {
-              $this->hash = $hash;
-              return $this;
-        }
-
-    //requis par UserInterface
-    public function getSalt(){
-        return null;
-    }
-
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
-    public function eraseCredentials(){}
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -204,6 +191,61 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCity(?string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+    
+    //requis par PasswordAuthenticatedUserInterface
+    public function getPassword(): string
+        {
+            return $this->hash;
+        }
+    
+        public function setPassword(string $hash): self
+        {
+              $this->hash = $hash;
+              return $this;
+        }
+
+    //requis par UserInterface
+    public function getSalt(){
+        return null;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+    public function eraseCredentials(){}
+
+
+
+    /**
+     * @return Collection<int, TableBooking>
+     */
+    public function getTableBookings(): Collection
+    {
+        return $this->tableBookings;
+    }
+
+    public function addTableBooking(TableBooking $tableBooking): self
+    {
+        if (!$this->tableBookings->contains($tableBooking)) {
+            $this->tableBookings[] = $tableBooking;
+            $tableBooking->setBooker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTableBooking(TableBooking $tableBooking): self
+    {
+        if ($this->tableBookings->removeElement($tableBooking)) {
+            // set the owning side to null (unless already changed)
+            if ($tableBooking->getBooker() === $this) {
+                $tableBooking->setBooker(null);
+            }
+        }
 
         return $this;
     }
