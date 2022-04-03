@@ -329,3 +329,9 @@ section.about {
 section.tableBooking {
     background: url("../img/bar-dark.jpg") no-repeat fixed #000;
 }
+
+            /* HOMEMENU */
+
+section.homeMenu {
+    background: url("../img/table-dark.jpg") no-repeat fixed #000;
+}
