@@ -28,6 +28,17 @@ main {
     background-color: var(--marron);
     color:#fff;
 }
+.btn-outline-brown {
+    background-color: #fff;
+    color:var(--marron);
+    border:1px solid var(--marron);
+}
+.btn-outline-brown:hover {
+    background-color:var(--marron);
+    color:#fff !important;
+    border:1px solid #fff;
+}
+
 h1 {
     color:var(--marron);
 }
@@ -333,5 +344,19 @@ section.tableBooking {
             /* HOMEMENU */
 
 section.homeMenu {
+    background: url("../img/table-dark.jpg") no-repeat fixed #000;
+}
+
+section.homeMenu .card {
+    padding:0;
+    margin:.8em;
+}
+section.homeMenu .card-footer {
+    background-color: #fff;
+}
+
+/* showMenu*/
+
+section.showMenu {
     background: url("../img/table-dark.jpg") no-repeat fixed #000;
 }

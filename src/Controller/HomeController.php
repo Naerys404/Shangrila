@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\TableBooking;
 use App\Form\TableBookingType;
+use App\Repository\MenuRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,8 +15,11 @@ class HomeController extends AbstractController
 {
     //homePage + intégration de la réservation d'une table via la homepage
     #[Route('/', name: 'homePage')]
-    public function index(Request $request, EntityManagerInterface $manager): Response
+    public function index(Request $request, EntityManagerInterface $manager, MenuRepository $repo): Response
     {
+        //recuperations des != menus 
+        $menus = $repo->findAll();
+
         $user = $this->getUser();
         $tableBooking = new TableBooking();
 
@@ -26,7 +30,7 @@ class HomeController extends AbstractController
             
             $form->handleRequest($request);
             
-            //si le formulaire est bien envoyé, on flush les données et on redirige vers la page de confirmation
+            //si le formulaire de résa est bien envoyé, on flush les données et on redirige vers la page de confirmation
             if($form->isSubmitted() && $form->isValid()){
 
                 $user = $this->getUser();
@@ -41,7 +45,7 @@ class HomeController extends AbstractController
         }
         
         return $this->render('home/home.html.twig', [
-            'title' => 'Restaurant Shangrila | Accueil', 'form'=>$form->createView()
+            'title' => 'Restaurant Shangrila | Accueil', 'form'=>$form->createView(), 'menu'=>$menus
         ]);
     }
 

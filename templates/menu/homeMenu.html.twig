@@ -11,14 +11,34 @@
      
         <div class="row justify-content-center">
           
-            <div class="col-md-6 jumbotron">
-                <h1 class="h2 mb-3">Notre menu</h1>
+            <div class="col-md-8 jumbotron">
+                <h1 class="h2 mb-4">Notre menu</h1>
                 <hr class="brown">
+                <div class="row">
 
-                    
+                {% for menu in menu %}
+                 <div class="card mt-4 col-md-5 mx-auto">
+                        <img src="{{menu.image}}" class="card-img-top" alt="{{menu.title}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{menu.title}}</h5>
+                            <p class="card-text">{{menu.description}}</p>
+                            <h6><strong>{{menu.price}}<i class="fa fa-eur" aria-hidden="true"></i></strong></h6>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% for meal in menu.meals %}
 
+                                <li class="list-group-item">{{meal.title}}<p><small><i>{{meal.description}}</i></small></p></li> 
+                            {% endfor %}                
+                        </ul>
+                            <div class="card-footer">
+                                <a href="#" class="card-link btn btn-brown">Commander</a>
+                            </div>
+                    </div>
+
+                {% endfor %}
+                </div>
             </div>            
-        </div>
+    </div>
     
     </section>
 {% endblock %}

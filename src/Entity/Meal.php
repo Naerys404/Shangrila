@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\MealRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MealRepository::class)]
@@ -18,8 +17,11 @@ class Meal
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
-    #[ORM\ManyToMany(targetEntity: Menu::class, inversedBy: 'meals')]
-    private $type;
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $description;
+
+    #[ORM\ManyToOne(targetEntity: Menu::class, inversedBy: 'meals')]
+    private $category;
 
     public function __construct()
     {
@@ -43,26 +45,26 @@ class Meal
         return $this;
     }
 
-    /**
-     * @return Collection<int, Menu>
-     */
-    public function getType(): Collection
+    public function getDescription(): ?string
     {
-        return $this->type;
+        return $this->description;
     }
 
-    public function addType(Menu $type): self
+    public function setDescription(?string $description): self
     {
-        if (!$this->type->contains($type)) {
-            $this->type[] = $type;
-        }
+        $this->description = $description;
 
         return $this;
     }
 
-    public function removeType(Menu $type): self
+    public function getCategory(): ?Menu
     {
-        $this->type->removeElement($type);
+        return $this->category;
+    }
+
+    public function setCategory(?Menu $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

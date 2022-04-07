@@ -51,7 +51,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[ORM\Column(type: 'string', nullable: true)]
+    #[Assert\Range(min:01000, max:95850, minMessage:"Code postal invalide", maxMessage:"Code postal invalide")]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $postalCode;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

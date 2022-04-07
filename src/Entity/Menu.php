@@ -18,14 +18,17 @@ class Menu
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
-    #[ORM\Column(type: 'array')]
-    private $content = [];
-
     #[ORM\Column(type: 'float')]
     private $price;
 
-    #[ORM\ManyToMany(targetEntity: Meal::class, mappedBy: 'type')]
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $description;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Meal::class)]
     private $meals;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $image;
 
     public function __construct()
     {
@@ -49,17 +52,6 @@ class Menu
         return $this;
     }
 
-    public function getContent(): ?array
-    {
-        return $this->content;
-    }
-
-    public function setContent(array $content): self
-    {
-        $this->content = $content;
-
-        return $this;
-    }
 
     public function getPrice(): ?float
     {
@@ -69,6 +61,19 @@ class Menu
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
@@ -85,7 +90,7 @@ class Menu
     {
         if (!$this->meals->contains($meal)) {
             $this->meals[] = $meal;
-            $meal->addType($this);
+            $meal->setCategory($this);
         }
 
         return $this;
@@ -94,8 +99,23 @@ class Menu
     public function removeMeal(Meal $meal): self
     {
         if ($this->meals->removeElement($meal)) {
-            $meal->removeType($this);
+            // set the owning side to null (unless already changed)
+            if ($meal->getCategory() === $this) {
+                $meal->setCategory(null);
+            }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

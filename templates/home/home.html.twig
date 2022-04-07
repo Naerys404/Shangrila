@@ -52,7 +52,7 @@
                 <div class="col">
                     <h1>Interpellatta <br> <span style="color:#fff;">paucis indignatis</span></h1>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam animi amet in obcaecati voluptatibus dignissimos.</p>
-                    <a href="#" class="btn btn-md" tabindex="-1" role="button" aria-disabled="true">+ Détails</a>
+                    <a href="{{path('homeMenu')}}" class="btn btn-md" tabindex="-1" role="button" aria-disabled="true">+ Détails</a>
                 </div>    
 
         </section>
@@ -66,68 +66,32 @@
                 <h3>Menu</h3>
                 <h4>Lorem ipsum dolor</h4>
             </div>
-            <div class="row col-md-10 offset-md-2 mr-auto mt-5">
-            <div class="card mb-3" style="max-width:520px;">
+            <div class="row col-md-10 offset-md-1 mr-auto mt-5">
+
               <div class="row">
-                <div class="col-md-6">
-                  <img src="img/delicious_1.jpg" alt="gateaux">
+
+                {% for menu in menu %}
+
+                <div class="card mb-3 col-md-6">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{menu.image}}" class="img-fluid" alt="{{menu.title}}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{menu.title}}</h5>
+                                <p class="card-text">{{menu.description}}</p>
+                                <a class="btn btn-outline-brown" href="{{path('show_menu', {'id': menu.id})}}">+ de détails</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="card-body">
-                    <h5 class="card-title">Petit Déjeuner</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eaque cupiditate eos dignissimos.</p>
-                    <a class="btn" href="#">Commander</a>
-                  </div>
-                </div>
+
+                {% endfor %}
+
               </div>
             </div>
             
-            <div class="card mb-3" style="max-width: 520px;">
-              <div class="row">
-                <div class="col-md-6">
-                  <img src="img/delicious_2.jpg" alt="gateaux">
-                </div>
-                <div class="col-md-6">
-                  <div class="card-body">
-                    <h5 class="card-title">Déjeuner</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eaque cupiditate eos dignissimos..</p>
-                    <a class="btn" href="#">Commander</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="card mb-3" style="max-width: 520px;">
-              <div class="row">
-                <div class="col-md-6">
-                  <img src="img/delicious_3.jpg" alt="gateaux">
-                </div>
-                <div class="col-md-6">
-                  <div class="card-body">
-                    <h5 class="card-title">Diner</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eaque cupiditate eos dignissimos.</p>
-                    <a class="btn" href="#">Commander</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card mb-3" style="max-width: 520px;">
-              <div class="row">
-                <div class="col-md-6">
-                  <img src="img/delicious_4.jpg" alt="gateaux" >
-                </div>
-                <div class="col-md-6">
-                  <div class="card-body">
-                    <h5 class="card-title">Fast Food</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eaque cupiditate eos dignissimos.</p>
-                    <a class="btn" href="#">Commander</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
         </section>
         
         <section id="galerie" class="row">

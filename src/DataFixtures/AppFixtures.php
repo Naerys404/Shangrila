@@ -2,10 +2,12 @@
 
 namespace App\DataFixtures;
 
+use DateTime;
 use Faker\Factory;
+use App\Entity\Meal;
+use App\Entity\Menu;
 use App\Entity\User;
 use App\Entity\TableBooking;
-use DateTime;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -48,7 +50,7 @@ class AppFixtures extends Fixture
                 ->setEmail($faker->email())
                 ->setPassword($hashedPassword)
                 ->setAddress($faker->streetAddress())
-                ->setPostalCode($faker->randomNumber(5, true))
+                ->setPostalCode($faker->numberBetween(11000,95850))
                 ->setCity($faker->city());
 
                 $manager->persist($user);
@@ -57,13 +59,13 @@ class AppFixtures extends Fixture
         }
 
         //réservations de tables
-        for ($j=0; $j<=25; $j++){
+        for ($j=1; $j<=25; $j++){
             $tableBookings = [];
             
             $tableBooking = new TableBooking();
             $user = $users[mt_rand(0, count($users)-1)];
 
-            $date = $faker->dateTimeBetween('now', '+3 months');
+            $date = $faker->dateTimeBetween('now', '+2 months');
             $timeSheet = ["12h00", "19h00", "20h00", "21h00"];
 
             $tableBooking->setBooker($user)
@@ -75,7 +77,37 @@ class AppFixtures extends Fixture
             $tableBookings[]=$tableBooking;
         }
 
-        //creations de plats + menus
+        //creation de menus
+        for ($k=1; $k<=4; $k++){
+
+            $menu = new Menu();
+            $menus = [];
+    
+            $menu->setTitle($faker->sentence(3))
+                ->setPrice($faker->numberBetween(6,15))
+                ->setDescription($faker->sentence())
+                ->setImage($faker->imageUrl())
+                ;
+    
+                $manager->persist($menu);
+                $menus[]=$menu;
+        }
+
+
+        //creations de plats 
+        for ($l=1; $l<=10; $l++){
+            $meals = [];
+            $meal = new Meal();
+            $menu = $menus[rand(0, count($menus)-1)];
+
+            $meal->setTitle($faker->sentence(5))
+                ->setDescription($faker->sentence())
+                ->setCategory($menu);
+
+            $manager->persist($meal);
+            $meals[]=$meal;
+
+        }
 
     $manager->flush();        
        
