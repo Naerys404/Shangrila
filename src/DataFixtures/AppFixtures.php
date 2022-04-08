@@ -55,6 +55,7 @@ class AppFixtures extends Fixture
 
                 $manager->persist($user);
                 $users[]= $user;
+                $manager->flush($users);
         
         }
 
@@ -75,41 +76,113 @@ class AppFixtures extends Fixture
             
             $manager->persist($tableBooking);
             $tableBookings[]=$tableBooking;
+     
         }
 
-        //creation de menus
-        for ($k=1; $k<=4; $k++){
+        //creation des menus principaux (petit dejeuner, dejeuner, diner et fastfood )
 
-            $menu = new Menu();
+            $breakfast = new Menu();
+            $lunch = new Menu();
+            $diner = new Menu();
+            $fastFood = new Menu();
+
             $menus = [];
     
-            $menu->setTitle($faker->sentence(3))
-                ->setPrice($faker->numberBetween(6,15))
+            $breakfast->setTitle("Petit Déjeuner")
+                ->setPrice(6)
                 ->setDescription($faker->sentence())
-                ->setImage($faker->imageUrl())
+                ->setImage('/img/breakfast.jpg')
                 ;
-    
-                $manager->persist($menu);
-                $menus[]=$menu;
-        }
 
+                $manager->persist($breakfast);
+                $menus[]=$breakfast;
 
-        //creations de plats 
-        for ($l=1; $l<=10; $l++){
-            $meals = [];
-            $meal = new Meal();
-            $menu = $menus[rand(0, count($menus)-1)];
-
-            $meal->setTitle($faker->sentence(5))
+            $lunch->setTitle("Déjeuner")
+                ->setPrice(12)
                 ->setDescription($faker->sentence())
-                ->setCategory($menu);
+                ->setImage('/img/lunch.jpg')
+                ;
+                $manager->persist($lunch);
+                $menus[]=$lunch;
 
-            $manager->persist($meal);
-            $meals[]=$meal;
+            $diner->setTitle("Diner")
+                ->setPrice(15)
+                ->setDescription($faker->sentence())
+                ->setImage('/img/diner.jpg')
+                ;
+                $manager->persist($diner);
+                $menus[]=$diner;
+                
+            $fastFood->setTitle("Fast Food")
+                ->setPrice(12)
+                ->setDescription($faker->sentence())
+                ->setImage('/img/fastfood.jpg')
+                ;
+                $manager->persist($fastFood);
+                $menus[]=$fastFood;
 
-        }
+            $manager->flush($menus);
 
-    $manager->flush();        
+
+             //creations de plats pour etoffer chaque menu
+           
+                $meals = [];
+
+                //PETIT DEJEUNER
+                for ($a=1;$a<=3;$a++)
+                {
+                    $breakfastMeal = new Meal();
+                    $breakfastMeal->setTitle($faker->sentence(3))
+                        ->setDescription($faker->sentence())
+                        ->setCategory($breakfast);
+    
+                    $manager->persist($breakfastMeal);
+                    $meals[]=$breakfastMeal;
+                }
+              
+
+                //DEJEUNER
+                for ($b=1;$b<=3;$b++)
+                {
+                    $lunchMeal = new Meal();
+                    $lunchMeal->setTitle($faker->sentence(3))
+                        ->setDescription($faker->sentence())
+                        ->setCategory($lunch);
+    
+                    $manager->persist($lunchMeal);
+                    $meals[]=$lunchMeal;
+                }
+
+                //DINER
+
+                for ($c=1;$c<=3;$c++)
+                {
+                    $dinerMeal = new Meal();
+                    $dinerMeal->setTitle($faker->sentence(3))
+                        ->setDescription($faker->sentence())
+                        ->setCategory($diner);
+    
+                    $manager->persist($dinerMeal);
+                    $meals[]=$dinerMeal;
+                }
+
+                //FASTFOOD
+
+                for ($d=1;$d<=3;$d++)
+                {
+                    $fastFoodMeal = new Meal();
+                    $fastFoodMeal->setTitle($faker->sentence(3))
+                        ->setDescription($faker->sentence())
+                        ->setCategory($fastFood);
+    
+                    $manager->persist($fastFoodMeal);
+                    $meals[]=$fastFoodMeal;
+                }
+
+
+        
+            $manager->flush();
+       
        
     }
 }

@@ -15,7 +15,6 @@
                 <h1 class="h2 mb-4">Formule "{{menu.title}}"</h1>
                 <hr class="brown">
                 <div class="row">
-
                     <div class="mt-4 col-md-5 mx-auto">
                             <img src="{{menu.image}}" class="card-img-top" alt="{{menu.title}}">
                             <div class="mt-2">
@@ -27,7 +26,7 @@
                     </div>
                
                     <div class="col-md-5 mx-auto">
-                    <!-- affiche les plats du menu -->
+                    <!-- affiche les plats du menu selectionné -->
                         <ul class="list-group list-group-flush">
                                 {% for meal in menu.meals %}
                                     <li class="list-group-item">{{meal.title}}<p><small><i>{{meal.description}}</i></small></p></li> 
