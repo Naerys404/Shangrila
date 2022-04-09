@@ -3,41 +3,48 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block body %}
-    <div class="position-relative">{% include 'inc/nav-header.html.twig' %}</div>
+    {% include 'inc/nav-header.html.twig' %}
+    {% include './inc/flashs.html.twig' %}
    
     <section class="container-fluid showMenu">
-
-     {% include './inc/flashs.html.twig' %}
      
         <div class="row justify-content-center">
           
             <div class="col-md-8 jumbotron">
-                <h1 class="h2 mb-4">Formule "{{menu.title}}"</h1>
+            
+                    <h1 class="h2 mb-2">Formule "{{menu.title}}"</h1>
+                     <p class="card-text">{{menu.description}}</p>
+                
                 <hr class="brown">
                 <div class="row">
                     <div class="mt-4 col-md-5 mx-auto">
-                            <img src="{{menu.image}}" class="card-img-top" alt="{{menu.title}}">
-                            <div class="mt-2">
-                                <h5 class="card-title">{{menu.title}}</h5>
-                                <p class="card-text">{{menu.description}}</p>
-                                <h4><strong>{{menu.price}}<i class="fa fa-eur" aria-hidden="true"></i></strong></h4>
-                            </div>
-                            
+                        <img src="{{menu.image}}" class="card-img-top" alt="{{menu.title}}">         
                     </div>
                
                     <div class="col-md-5 mx-auto">
+                    
                     <!-- affiche les plats du menu selectionné -->
                         <ul class="list-group list-group-flush">
                                 {% for meal in menu.meals %}
                                     <li class="list-group-item">{{meal.title}}<p><small><i>{{meal.description}}</i></small></p></li> 
                                 {% endfor %}                
                             </ul>
-                        <div class="mt-4 d-flex justify-content-center">
-                            <a href="#" class="card-link btn btn-lg btn-outline-brown">Commander</a>
+
+                        <div class="d-flex justify-content-center">
+                            <h3><strong>{{menu.price}}<i class="fa fa-eur" aria-hidden="true"></i></strong></h3>
                         </div>
+                        
+                        <div class="mt-4 d-flex justify-content-center align-baseline">
+                            <a href="#" class="card-link btn btn-lg btn-brown">Commander</a>
+                        </div>
+                      
                     </div>
-                   
+                    <div class='d-flex justify-content-end'>
+                   <a href="{{path('homeMenu')}}" class="btn btn-outline-brown m-1">Retour aux menus</a>
+                   </div>
                 </div>
+
+                
             </div>            
     </div>
     

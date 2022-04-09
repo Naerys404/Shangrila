@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Menu;
 use App\Entity\TableBooking;
 use App\Form\TableBookingType;
+use App\Repository\MealRepository;
 use App\Repository\MenuRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +17,11 @@ class HomeController extends AbstractController
 {
     //homePage + intégration de la réservation d'une table via la homepage
     #[Route('/', name: 'homePage')]
-    public function index(Request $request, EntityManagerInterface $manager, MenuRepository $repo): Response
+    public function index(Request $request, EntityManagerInterface $manager, MenuRepository $menuRepo, MealRepository $mealRepo): Response
     {
         //recuperations des != menus 
-        $menus = $repo->findAll();
+        $menus = $menuRepo->findAll();
+        $meals = $mealRepo->findAll();
 
         $user = $this->getUser();
         $tableBooking = new TableBooking();
@@ -45,14 +48,25 @@ class HomeController extends AbstractController
         }
         
         return $this->render('home/home.html.twig', [
-            'title' => 'Restaurant Shangrila | Accueil', 'form'=>$form->createView(), 'menu'=>$menus
+            'title' => 'Restaurant Shangrila | Accueil', 'form'=>$form->createView(), 'menu'=>$menus, 'meal'=>$meals
         ]);
     }
 
     //page "A propos" du restaurant
-    #[Route('/about', name:'aboutPage')]
+    #[Route('/about', name:'about')]
     public function about(){
         
         return $this->render('home/about.html.twig', ['title' => 'Restaurant Shangrila | A propos']);
+    }
+
+    //page galerie du restaurant
+    #[Route('/gallery', name:'gallery')]
+    public function gallery(MenuRepository $menuRepo, MealRepository $mealRepo){
+
+        $menu = $menuRepo->findAll();
+        $meal = $mealRepo->findAll();
+
+        
+        return $this->render('home/gallery.html.twig', ['title'=>'Restaurant Shangrila | Galerie', 'menu'=>$menu, 'meal'=>$meal]);
     }
 }

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block body %}
+
+   {% include 'inc/nav-header.html.twig' %}
+   {% include './inc/flashs.html.twig' %}
+   
+    <section class="container-fluid gallery">
+     
+        <div class="row justify-content-center">
+          
+                <div class="jumbotron col-md-10">
+                    <h1 class="h2">Galerie</h1>
+                    <hr class="brown">
+                    {# image principale de la galerie #}
+                    <div class="col">
+                        <img src="{{asset('/img/table.jpg')}}" alt="bar" class="img-fluid">
+                    </div>
+                     <hr class="brown mt-3">
+                
+                    <div class="row mx-auto">
+                    {# On récupère les images via les plats dans une boucle #}
+                    {% for meal in meal %}
+                        <div class="col-md-3 mb-3 galleryImg">
+                            <img src="{{meal.image}}" alt="{{meal.title}}" class="img-fluid">
+                            <div class="overlay">{{meal.title}}</div>
+                        </div>
+                    {% endfor %}
+
+                    {# galerie des menus #}
+                    <hr class="brown mt-3">
+                    <div class="menuImg">
+                    {% for menu in menu %}
+                        <div class="galleryImg">
+                            <img src="{{menu.image}}" alt="breakfast" class="img-fluid">
+                            <div class="overlay">{{menu.title}}</div>
+                        </div>
+                    {% endfor %}   
+                    </div>
+
+                </div>
+            </div>   
+        </div>
+    
+    </section>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block body %}
+   {% include 'inc/nav-header.html.twig' %}
+    {% include './inc/flashs.html.twig' %}
+   
+    <section class="container-fluid contact">
+
+        <div class="row justify-content-center">
+          
+            <div class="col-md-6 jumbotron">
+                <h1 class="h2 mb-3">Formulaire de contact</h1>
+
+                {{ form_start(form) }}
+
+                   {{form_widget(form)}}
+
+                    <button type="submit" class="btn btn-brown"> Envoyer </button>   
+
+                {{ form_end(form) }}
+                    
+
+            </div>            
+        </div>
+    
+    </section>
+{% endblock %}

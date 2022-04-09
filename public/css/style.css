@@ -5,11 +5,13 @@
     color:var(--marron);
 }
 /* GENERAL */
-body {
+body, html {
     background:#fff;
-    height:100%;
-    width: 100%;
+    min-height: 100vh;
+    min-width: 100vw;
+   
 }
+
 main {
     margin:0;
     padding:0 ! important;
@@ -27,6 +29,12 @@ main {
 .btn-brown {
     background-color: var(--marron);
     color:#fff;
+}
+
+.btn-brown:hover {
+    background-color:#fff;
+    color: var(--marron);
+    border:1px solid var(--marron);
 }
 .btn-outline-brown {
     background-color: #fff;
@@ -327,29 +335,39 @@ section.profile table th {
                  /* ACCOUNT UPDATE*/
 
 section.accountUpdate {
-    background: url("../img/image-1.jpg") no-repeat fixed #000;
+    background: url("../img/image-1.jpg") no-repeat #000;
+    background-size: cover;
 }
 
                 /* ABOUT */
 
 section.about {
-    background: url("../img/bar-dark.jpg") no-repeat fixed #000;
+    background: url("../img/fond3.jpg") no-repeat #000;
+    background-size: cover;
 }
 
                 /* TABLEBOOKING */
 section.tableBooking {
-    background: url("../img/bar-dark.jpg") no-repeat fixed #000;
+    background: url("../img/bar-dark.jpg") no-repeat #000;
+    background-size: cover;
 }
 
             /* HOMEMENU */
 
 section.homeMenu {
-    background: url("../img/table-dark.jpg") no-repeat fixed #000;
+    background: url("../img/table-dark.jpg") no-repeat #000;
+    background-size: cover;
 }
 
 section.homeMenu .card {
     padding:0;
     margin:.8em;
+    
+}
+section.homeMenu img {
+    max-height: 20em;
+    object-fit: cover;
+    
 }
 section.homeMenu .card-footer {
     background-color: #fff;
@@ -358,5 +376,56 @@ section.homeMenu .card-footer {
 /* showMenu*/
 
 section.showMenu {
-    background: url("../img/table-dark.jpg") no-repeat fixed #000;
+    background: url("../img/table-dark.jpg") no-repeat #000;
+    background-size: cover;
+}
+
+/* gallery */
+section.gallery {
+    background: url("../img/fond3.jpg") no-repeat #000;
+    background-size: cover;
+}
+section.gallery .menuImg {
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+    width:100%;
+    
+}
+section.gallery .menuImg img {
+    max-height:340px;
+}
+
+section.gallery .menuImg .overlay {
+    width: 100%;
+}
+
+section.gallery .galleryImg {
+    position: relative;
+    max-width: 275px;
+}
+section.gallery .overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); 
+  color: #f1f1f1;
+  width: 91%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 15px;
+  padding: 10px;
+  text-align: center;
+}
+
+section.gallery .galleryImg:hover .overlay {
+  opacity: 1;
+}
+
+/* contact */
+
+section.contact {
+    background: url("../img/fond3.jpg") no-repeat #000;
+    background-size: cover;
 }

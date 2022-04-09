@@ -31,7 +31,7 @@ class AppFixtures extends Fixture
         ->setEmail("Naerys@test.com")
         ->setPassword($this->hasher->hashPassword($adminUser, 'testtest'))
         ->setAddress("17 place des coquelicots")
-        ->setPostalCode("31330")
+        ->setPostalCode(31330)
         ->setCity("Larra")
         ->setRoles(['ROLE_ADMIN']);
 
@@ -79,7 +79,7 @@ class AppFixtures extends Fixture
      
         }
 
-        //creation des menus principaux (petit dejeuner, dejeuner, diner et fastfood )
+        //creation des menus du restaurant (petit dejeuner, dejeuner, diner et fastfood )
 
             $breakfast = new Menu();
             $lunch = new Menu();
@@ -90,7 +90,7 @@ class AppFixtures extends Fixture
     
             $breakfast->setTitle("Petit Déjeuner")
                 ->setPrice(6)
-                ->setDescription($faker->sentence())
+                ->setDescription($faker->sentence(15))
                 ->setImage('/img/breakfast.jpg')
                 ;
 
@@ -99,7 +99,7 @@ class AppFixtures extends Fixture
 
             $lunch->setTitle("Déjeuner")
                 ->setPrice(12)
-                ->setDescription($faker->sentence())
+                ->setDescription($faker->sentence(15))
                 ->setImage('/img/lunch.jpg')
                 ;
                 $manager->persist($lunch);
@@ -107,7 +107,7 @@ class AppFixtures extends Fixture
 
             $diner->setTitle("Diner")
                 ->setPrice(15)
-                ->setDescription($faker->sentence())
+                ->setDescription($faker->sentence(15))
                 ->setImage('/img/diner.jpg')
                 ;
                 $manager->persist($diner);
@@ -115,7 +115,7 @@ class AppFixtures extends Fixture
                 
             $fastFood->setTitle("Fast Food")
                 ->setPrice(12)
-                ->setDescription($faker->sentence())
+                ->setDescription($faker->sentence(15))
                 ->setImage('/img/fastfood.jpg')
                 ;
                 $manager->persist($fastFood);
@@ -134,7 +134,9 @@ class AppFixtures extends Fixture
                     $breakfastMeal = new Meal();
                     $breakfastMeal->setTitle($faker->sentence(3))
                         ->setDescription($faker->sentence())
-                        ->setCategory($breakfast);
+                        ->setCategory($breakfast)
+                        //pour mettre une image nommée de 1 à 3 (qui correspondent à des petit dejeuners)
+                        ->setImage("/img/$a.jpg");
     
                     $manager->persist($breakfastMeal);
                     $meals[]=$breakfastMeal;
@@ -142,12 +144,14 @@ class AppFixtures extends Fixture
               
 
                 //DEJEUNER
-                for ($b=1;$b<=3;$b++)
+                for ($b=4;$b<=6;$b++)
                 {
                     $lunchMeal = new Meal();
                     $lunchMeal->setTitle($faker->sentence(3))
                         ->setDescription($faker->sentence())
-                        ->setCategory($lunch);
+                        ->setCategory($lunch)
+                        //meme principe on commence la boucle à 4 pour avoir les images de plats salés
+                        ->setImage("/img/$b.jpg");
     
                     $manager->persist($lunchMeal);
                     $meals[]=$lunchMeal;
@@ -155,12 +159,13 @@ class AppFixtures extends Fixture
 
                 //DINER
 
-                for ($c=1;$c<=3;$c++)
+                for ($c=7;$c<=9;$c++)
                 {
                     $dinerMeal = new Meal();
                     $dinerMeal->setTitle($faker->sentence(3))
                         ->setDescription($faker->sentence())
-                        ->setCategory($diner);
+                        ->setCategory($diner)
+                        ->setImage("/img/$c.jpg");
     
                     $manager->persist($dinerMeal);
                     $meals[]=$dinerMeal;
@@ -168,17 +173,17 @@ class AppFixtures extends Fixture
 
                 //FASTFOOD
 
-                for ($d=1;$d<=3;$d++)
+                for ($d=10;$d<=12;$d++)
                 {
                     $fastFoodMeal = new Meal();
                     $fastFoodMeal->setTitle($faker->sentence(3))
                         ->setDescription($faker->sentence())
-                        ->setCategory($fastFood);
+                        ->setCategory($fastFood)
+                        ->setImage("/img/$d.jpg");
     
                     $manager->persist($fastFoodMeal);
                     $meals[]=$fastFoodMeal;
                 }
-
 
         
             $manager->flush();

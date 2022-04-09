@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -35,6 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email(message:"Veuillez renseigner un mail valide.")]
     private $email;
 
+    #[Assert\Length(min:10, max:300, minMessage:"Votre adresse doit comporter au moins 10 caractères.", maxMessage:"Votre adresse doit comporter maximum 300 caractères.")]
     #[ORM\Column(type: 'text', nullable: true)]
     private $address;
 
@@ -51,7 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[Assert\Range(min:01000, max:95850, minMessage:"Code postal invalide", maxMessage:"Code postal invalide")]
+    #[Assert\Range(min:01000, max:95850, notInRangeMessage:"Code postal invalide.")]
     #[ORM\Column(type: 'integer', nullable: true)]
     private $postalCode;
 

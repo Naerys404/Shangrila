@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg nav-header">
+<div class="position-relative">
+    <nav class="navbar navbar-expand-lg nav-header">
                 <div class="container-fluid">
                   <a class="navbar-brand" href="{{path('homePage')}}"><img src="{{ asset('img/logo.png') }}" class="img-fluid" alt="logo"></a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +11,7 @@
                         <a class="nav-link active" aria-current="page" href="{{path('homePage')}}">Accueil</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="{{path('aboutPage')}}">A propos</a>
+                        <a class="nav-link" href="{{path('about')}}">A propos</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="{{path('table_booking')}}">Reservation</a>
@@ -19,7 +20,7 @@
                         <a class="nav-link" href="{{path('homeMenu')}}">Menu</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Galerie</a>
+                        <a class="nav-link" href="{{path('gallery')}}">Galerie</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="#">Blog</a>
@@ -28,9 +29,10 @@
                         <a class="nav-link" href="#">Boutique</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="{{path('contact')}}">Contact</a>
                       </li>
                     </ul>
                   </div>
                   </div>
                   </nav>
+</div>

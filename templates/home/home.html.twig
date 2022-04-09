@@ -18,7 +18,7 @@
                         <a class="nav-link active" aria-current="page" href="{{path('homePage')}}">Accueil</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="{{path('aboutPage')}}">A propos</a>
+                        <a class="nav-link" href="{{path('about')}}">A propos</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="{{path('table_booking')}}">Reservation</a>
@@ -27,7 +27,7 @@
                         <a class="nav-link" href="{{path('homeMenu')}}">Menu</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Galerie</a>
+                        <a class="nav-link" href="{{path('gallery')}}">Galerie</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="#">Blog</a>
@@ -36,7 +36,7 @@
                         <a class="nav-link" href="#">Boutique</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="{{path('contact')}}">Contact</a>
                       </li>
                     </ul>
                     <form class="d-flex">
@@ -58,6 +58,7 @@
         </section>
         <div class="homeStickyNav sticky-top">
             {% include 'inc/nav-header.html.twig' %}
+             {% include './inc/flashs.html.twig' %}
         </div>
 
         <section id="menu" class="row">
@@ -102,21 +103,11 @@
             </div>
             <div class="container-fluid">
                <div class="d-flex flex-wrap">
-                  <img src="img/1.jpg" alt="1">
-
-                  <img src="img/2.jpg" alt="2">
-
-                  <img src="img/3.jpg" alt="3">
-
-                  <img src="img/4.jpg" alt="4">
-
-                  <img src="img/5.jpg" alt="5">
-
-                  <img src="img/6.jpg" alt="6">
-
-                  <img src="img/7.jpg" alt="7">
-
-                  <img src="img/8.jpg" alt="8">
+                
+                <!--  galerie de tous les plats -->
+                {% for meal in meal %}
+                  <img src="{{meal.image}}" alt="{{meal.title}}">
+                {% endfor %}
 
               </div>
             </div>
