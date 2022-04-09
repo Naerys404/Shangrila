@@ -5,9 +5,9 @@
 {% block body %}
 
     {% include '/inc/nav-header.html.twig'%}
-     {% include 'inc/flashs.html.twig' %}
 
     <section class="container-fluid profile">
+    {% include 'inc/flashs.html.twig' %}
      
         <div class="row justify-content-center">
           
@@ -18,7 +18,7 @@
                 <hr class="brown">
                     
                     <div class="row">
-                        
+                        {# espace info perso + modif #}
                         <div class="col row">
                             <h4 class="mb-4">Mes informations personnelles</h4> 
                             <div class="col">
@@ -28,19 +28,19 @@
                             <div class="col">
                                 <p><strong>Adresse postale: </strong><br> {{user.fulladdress|raw}}</p>
                             </div>
-                            <div class="d-inline-block mt-3">
+                            <div class="d-inline-block mt-4">
                                     <a class="btn btn-brown" href="{{path('account_update')}}">Modifier mes informations</a>  
                                     <a class="btn btn-secondary" href="{{path('password_update')}}">Modifier mon mot de passe</a>
                             </div>
                         </div>
 
                         <div class="col">
-                          
+                                {# espace historique de réservation #}
                                 <h4 class="mb-4">Historique de mes réservations</h4>
                                 <div class="row">
                                 <hr>
-                                
-                                    {% for tableBooking in tableBookings %}
+                                {% if user.tableBookings|length > 0 %}
+                                    {% for tableBooking in user.tableBookings %}
                                         <div class="d-flex align-items-baseline justify-content-around">
                                             <div class="flex-grow-2">
                                                 <p class="card-title">Réservation n°{% if tableBooking.id < 10 %}0{{tableBooking.id}}{% else %}{{tableBooking.id}}{% endif %}</p>
@@ -57,11 +57,14 @@
                                         </div>
                                         <hr> 
                                     {% endfor %}
-                        
+                                {% else %}
+                                    <div class="alert alert-warning">Il n'y a pas encore de réservation</div>
+                                {% endif %}
                                 </div>
                                 
                             </div>
                             <hr class="brown mt-3">
+                            {# espace historique de commande #}
                             <h4 class="mb-4">Historique de mes commandes</h4>
                                
                                 <div class="card" style="width: 18rem;">
@@ -80,9 +83,53 @@
                                         <a href="#" class="card-link">Another link</a>
                                     </div>
                                 </div>
-                                
-                            
+                                {# espace commentaire #}
+                                <div class="mt-4 text-center">
+                                        <div class="mt-3 mb-3 pb-3 commentDiv">
+                                        {# si il y a deja un commentaire, titre personnalisé #}
+                                        {% if user.comment is null %}
+                                            <h4 class="mb-3 pt-3">Votre avis nous interesse ! <i class="fa-solid fa-message-quote"></i></h4>
+                                        {% else %}
+                                            <h4 class="mb-3 pt-3">Merci d'avoir donné votre avis ! <i class="fa-solid fa-message-quote"></i></h4>
+                                        {% endif %}
+                                        <div class="col-md-6 mx-auto">
+                                            {# si il y a deja une réservation ou une commande et si il n'y a pas de commentaire#}
+                                                {% if user.tableBookings|length > 0 and user.comment is null %} {# or delivery != null #}
 
+                                            {{form_start(form)}}
+                                                {{form_widget(form)}}
+                                                <button type="submit" class="btn btn-brown mb-4">Envoyer</button>
+                                            {{form_end(form)}}
+                                        </div>
+                                        {# si il y a deja un commentaire : on l'affiche #}
+                                        {% elseif user.comment is not null %}
+                                        <div class="d-flex flex-column">
+                                                <div>
+                                                    <quote><i class="fa-solid fa-quote-left"></i> <i>{{user.comment.content}}</i> <i class="fa-solid fa-quote-right"></i></quote>
+                                                </div>
+                                                <div class="mb-4">
+                                                   <span class="rating">
+
+                                                    {% for i in 1..5 %}
+                                                        {% if i <= user.comment.rating %}
+                                                            <i class="fas fa-star"></i>
+                                                        {% else %}
+                                                            <i class="far fa-star"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    </span>
+                                                </div>
+                                             {% else %}
+                                                <p class="brown"><strong>Vous pourrez noter notre restaurant après avoir effectué une commande ou après avoir réservé une table.</strong></p>
+                                            {% endif %}
+                                              
+                                        </div>
+
+                                           
+
+                                        </div>
+                                       
+                                    </div>
                         </div>
                     </div>
                 </div>

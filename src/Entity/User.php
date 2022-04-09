@@ -53,6 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
+    //limitation des code postaux français
     #[Assert\Range(min:01000, max:95850, notInRangeMessage:"Code postal invalide.")]
     #[ORM\Column(type: 'integer', nullable: true)]
     private $postalCode;
@@ -63,11 +64,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'booker', targetEntity: TableBooking::class)]
     private $tableBookings;
 
+    #[ORM\OneToOne(mappedBy: 'author', targetEntity: Comment::class, cascade: ['persist', 'remove'])]
+    private $comment;
+
     public function __construct()
     {
         $this->tableBookings = new ArrayCollection();
     }
 
+    //date de création automatisée lors de l'inscription
     #[ORM\PrePersist]
     public function prePersist(){
           if(empty($this->createdAt)){
@@ -248,6 +253,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $tableBooking->setBooker(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getComment(): ?Comment
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?Comment $comment): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($comment === null && $this->comment !== null) {
+            $this->comment->setAuthor(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($comment !== null && $comment->getAuthor() !== $this) {
+            $comment->setAuthor($this);
+        }
+
+        $this->comment = $comment;
 
         return $this;
     }
