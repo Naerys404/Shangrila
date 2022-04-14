@@ -21,10 +21,5 @@ class MenuController extends AbstractController
         ]);
     }
 
-    #[Route('/menu/{id}', name:'show_menu')]
-    public function show(Menu $menu):Response {
 
-
-        return $this->render('menu/show.html.twig', ['title'=> 'Restaurant Shangrila | Détail du menu', 'menu'=>$menu, 'id'=>$menu->getId()] );
-    }
 }

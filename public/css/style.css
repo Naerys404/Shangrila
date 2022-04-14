@@ -28,17 +28,17 @@ main {
 }
 .btn-brown {
     background-color: var(--marron);
-    color:#fff;
+    color:#fff !important;
 }
 
 .btn-brown:hover {
     background-color:#fff;
-    color: var(--marron);
+    color: var(--marron)!important;
     border:1px solid var(--marron);
 }
 .btn-outline-brown {
     background-color: #fff;
-    color:var(--marron);
+    color:var(--marron) !important;
     border:1px solid var(--marron);
 }
 .btn-outline-brown:hover {

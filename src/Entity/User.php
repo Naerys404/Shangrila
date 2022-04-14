@@ -26,9 +26,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Assert\Length(max:255, maxMessage:"Vous ne pouvez pas dépasser 255 caractères.")]
     #[ORM\Column(type: 'string', length: 255)]
     private $firstname;
 
+    #[Assert\Length(max:255, maxMessage:"Vous ne pouvez pas dépasser 255 caractères.")]
     #[ORM\Column(type: 'string', length: 255)]
     private $lastname;
 
@@ -36,8 +38,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email(message:"Veuillez renseigner un mail valide.")]
     private $email;
 
-    #[Assert\Length(min:10, max:300, minMessage:"Votre adresse doit comporter au moins 10 caractères.", maxMessage:"Votre adresse doit comporter maximum 300 caractères.")]
-    #[ORM\Column(type: 'text', nullable: true)]
+    #[Assert\Length(min:10, max:300, minMessage:"Votre adresse doit comporter au moins 10 caractères.", maxMessage:"Votre adresse doit comporter 300 caractères au maximum.")]
+    #[ORM\Column(type: 'text', nullable: false)]
     private $address;
 
     #[Assert\Length(min:8, minMessage:'Votre mot de passe doit comporter au moins 8 caractères.')]
@@ -55,10 +57,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     //limitation des code postaux français
     #[Assert\Range(min:01000, max:95850, notInRangeMessage:"Code postal invalide.")]
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(type: 'integer', nullable: false)]
     private $postalCode;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    // Il semblerait qu'il existe une ville au nom de "Y" dans la Somme... Donc pas de limite de caractères min pour les villes ? :)
+    #[Assert\Length(max:255, maxMessage:"Vous ne pouvez pas dépasser 255 caractères.")]
+    #[ORM\Column(type: 'string', length: 255, nullable: false)]
     private $city;
 
     #[ORM\OneToMany(mappedBy: 'booker', targetEntity: TableBooking::class)]
@@ -67,9 +71,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'author', targetEntity: Comment::class, cascade: ['persist', 'remove'])]
     private $comment;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)]
+    private $orders;
+
     public function __construct()
     {
         $this->tableBookings = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     //date de création automatisée lors de l'inscription
@@ -275,6 +283,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getUser() === $this) {
+                $order->setUser(null);
+            }
+        }
 
         return $this;
     }

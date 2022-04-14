@@ -81,12 +81,13 @@ class AccountController extends AbstractController
         $user = $this->getUser();
         //récupération des résa de tables de l'user par date  
         $tableBookings = $repo->findBy(['booker'=>'user_id'], ['date'=>'DESC'],6, null );
+            
+            $comment = new Comment();
+            $form = $this->createForm(CommentType::class, $comment);
+            $form->handleRequest($request);
 
-        $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
+            if($form->isSubmitted() && $form->isValid()){
+                
 
                 $comment->setRating($comment->getRating())
                 ->setContent($comment->getContent())
@@ -96,7 +97,10 @@ class AccountController extends AbstractController
                 $manager->flush();
 
                 $this->addFlash("success", "Votre commentaire a bien été enregistré.");
+            
         }
+
+        
 
         return $this->render('account/profile.html.twig', [
             'title' => 'Restaurant Shangrila | Mon compte', 'user' => $user, 'tableBookings'=>$tableBookings, 'comment'=>$comment, 'form'=>$form->createView()
