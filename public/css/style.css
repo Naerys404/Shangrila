@@ -16,6 +16,9 @@ main {
     margin:0;
     padding:0 ! important;
 }
+.disabledLink {
+    cursor: default;
+}
 .bg-marron
 {
     background-color:var(--marron);

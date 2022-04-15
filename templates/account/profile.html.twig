@@ -69,21 +69,22 @@
 
                             {% if user.orders|length > 0 %}
                                     {% for order in user.orders %}
-                                        <div class="card" style="width: 18rem;">
-                                    <img src="{{user.order.menu.image}}" class="card-img-top" alt="{{user.order.menu.title}}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{user.order.menu.title}}</h5>
-                                        <p class="card-text">description</p>
-                                    </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">contenu menu</li>
-                                        <li class="list-group-item">contenu menu</li>
-                                        <li class="list-group-item">contenu menu</li>
-                                    </ul>
-                                    <div class="card-body">
-                                        <p>{{order.price}}</p>
-                                        <p>{{order.createdAt}}</p>
-                                    </div>
+                                       
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="" class="card-img-top" alt="titre">
+                                        <div class="card-body">
+                                            <h5 class="card-title">titre menu</h5>
+                                            <p class="card-text"></p>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">Référence: {{order.reference}}</li>
+                                            <li class="list-group-item"></li>
+                                            <li class="list-group-item">Commandé le : {{order.createdAt|date('d-m-Y')}}</li>
+                                        </ul>
+                                        <div class="card-body">
+                                            <p>prix</p>
+                                            <p>commandé le</p>
+                                        </div>
                                 </div>
                                     {% endfor %}
                                 {% else %}

@@ -83,7 +83,7 @@ class AccountController extends AbstractController
         //récupération des réservations de tables de l'user par date  
         $tableBookings = $tablebookingRepo->findBy(['booker'=>'user_id'], ['date'=>'DESC'],6, null );
         //récupération des commandes de repas de l'user par date
-        $orders = $orderRepo->findBy(['user'=>'user_id'], ['created_at'=>'DESC'],6, null );
+        $order = $orderRepo->findBy(['user'=>'user_id'], ['created_at'=>'DESC'],6, null );
             
             $comment = new Comment();
             $form = $this->createForm(CommentType::class, $comment);
@@ -106,7 +106,7 @@ class AccountController extends AbstractController
         
 
         return $this->render('account/profile.html.twig', [
-            'title' => 'Restaurant Shangrila | Mon compte', 'user' => $user, 'tableBookings'=>$tableBookings, 'comment'=>$comment, 'orders'=>$orders,'form'=>$form->createView()
+            'title' => 'Restaurant Shangrila | Mon compte', 'user' => $user, 'tableBookings'=>$tableBookings, 'comment'=>$comment, 'order'=>$order,'form'=>$form->createView()
         ]);
     }
 

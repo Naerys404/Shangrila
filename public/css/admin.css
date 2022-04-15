@@ -1,3 +1,44 @@
 .btn-link {
     text-decoration: none;
 }
+
+.bg-brown-lighter {
+    background-color:#bfa88b;
+    color:#fff;
+    align-items: center;
+    justify-content: end;
+}
+.page-link{
+    color:var(--marron);
+}
+.page-item.active .page-link {
+    background-color:var(--marron);
+    color:#fff;
+    border-color: var(--marron);
+}
+.bg-brown-lighter p {
+    margin-bottom:0;
+}
+
+.bg-white {
+    background-color:rgb(243, 243, 243) !important;
+    color:#1c1b1b;
+}
+
+.bg-white p {
+    margin-bottom:0;
+}
+
+header a.nav-link {
+    color:#1c1b1b;
+}
+
+section {
+    background: url("../img/table-dark.jpg") no-repeat fixed 0 0 #000;
+}
+
+.table-header {
+    background-color: #bfa88b;
+}
+
+

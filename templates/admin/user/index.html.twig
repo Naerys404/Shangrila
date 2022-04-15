@@ -3,5 +3,45 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block body %}
-    <h1>Gestion des clients</h1>
+    <section class="container-fluid">
+        <div class="row justify-content-center">
+          
+            <div class="col-md-10 jumbotron mt-2">
+               <h2 class="brown mb-2">Administration des clients</h2>
+                <hr class="brown">
+                <table class="table table-hover">
+                    <thead class="text-center table-header">
+                        <th scope="col">Id</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Adresse mail</th>
+                        <th scope="col">Adresse postale</th>
+                        <th scope="col">Date d'inscription</th>
+                        <th scope="col">Editer</th>
+                        <th scope="col">Supprimer</th>
+                    </thead>
+                    <tbody>
+                    {% for user in pagination.data %}
+                    <tr class="text-center">
+                        <td>{{user.id}}</td>
+                        <td>{{user.fullName}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.fullAddress|raw}}</td>
+                        <td >{{user.createdAt|date('d/m/Y H:i' )}}</td>
+                        <td class="col-1">
+                            <a href="{{path('admin_user_edit', {'id': user.id })}}" class="btn btn-brown btn-sm"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                        </td>
+                        <td>
+                            <a href="{{path('admin_user_delete', {'id': user.id })}}" class="btn btn-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i></a>   
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+            </table>
+
+                {{pagination.display()}}
+            </div>
+        </div>
+
+    </section>
+
 {% endblock %}
