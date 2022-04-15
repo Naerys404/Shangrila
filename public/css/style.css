@@ -437,3 +437,8 @@ section.contact {
     background: url("../img/fond3.jpg") no-repeat #000;
     background-size: cover;
 }
+
+/* bundles pages 404 et 403 */
+main.notFound, main.accessDenied {
+    background: url("../img/fond3.jpg") no-repeat #000;
+}

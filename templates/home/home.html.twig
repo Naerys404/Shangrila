@@ -33,7 +33,9 @@
                         <a class="nav-link" href="#">Blog</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Boutique</a>
+                        <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Bientôt disponible !" data-bs-html="true">
+                        Boutique
+                        </a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="{{path('contact')}}">Contact</a>
@@ -83,13 +85,7 @@
                                 <h5 class="card-title">{{menu.title}}</h5>
                                 <p class="card-text">{{menu.description}}</p>
 
-                                {% if app.user %}
-
-                                    <a href="{{path('order', {'id': menu.id})}}" class="btn btn-brown">Commander</a>
- 
-                                {% endif %}
-
-                                <a class="btn btn-outline-brown" href="{{path('homeMenu')}}">Voir + de détails</a>
+                                <a class="btn btn-outline-brown" href="{{path('showMenu', {'id':menu.id})}}">Commander</a>
                                 
                             </div>
                         </div>

@@ -58,7 +58,7 @@
                                         <hr> 
                                     {% endfor %}
                                 {% else %}
-                                    <div class="alert alert-warning">Il n'y a pas encore de réservation</div>
+                                    <div class="alert alert-warning">Il n'y a pas encore de réservations.</div>
                                 {% endif %}
                                 </div>
                                 
@@ -66,23 +66,31 @@
                             <hr class="brown mt-3">
                             {# espace historique de commande #}
                             <h4 class="mb-4">Historique de mes commandes</h4>
-                               
-                                <div class="card" style="width: 18rem;">
-                                    <img src="..." class="card-img-top" alt="...">
+
+                            {% if user.orders|length > 0 %}
+                                    {% for order in user.orders %}
+                                        <div class="card" style="width: 18rem;">
+                                    <img src="{{user.order.menu.image}}" class="card-img-top" alt="{{user.order.menu.title}}">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <h5 class="card-title">{{user.order.menu.title}}</h5>
+                                        <p class="card-text">description</p>
                                     </div>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">An item</li>
-                                        <li class="list-group-item">A second item</li>
-                                        <li class="list-group-item">A third item</li>
+                                        <li class="list-group-item">contenu menu</li>
+                                        <li class="list-group-item">contenu menu</li>
+                                        <li class="list-group-item">contenu menu</li>
                                     </ul>
                                     <div class="card-body">
-                                        <a href="#" class="card-link">Card link</a>
-                                        <a href="#" class="card-link">Another link</a>
+                                        <p>{{order.price}}</p>
+                                        <p>{{order.createdAt}}</p>
                                     </div>
                                 </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="alert alert-warning">Vous n'avez pas encore passé de commande.</div>
+                                {% endif %}
+                               
+                                
                                 {# espace commentaire #}
                                 <div class="mt-4 text-center">
                                         <div class="mt-3 mb-3 pb-3 commentDiv">

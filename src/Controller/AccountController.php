@@ -10,6 +10,7 @@ use App\Form\RegisterType;
 use App\Entity\TableBooking;
 use App\Entity\PasswordUpdate;
 use App\Form\PasswordUpdateType;
+use App\Repository\OrderRepository;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\TableBookingRepository;
@@ -76,11 +77,13 @@ class AccountController extends AbstractController
     //PROFIL DE L'USER (connecté uniquement)
     #[Route('/profile', name: 'account_home')]
     #[IsGranted("ROLE_USER")]
-    public function myAccount(TableBookingRepository $repo, Request $request, EntityManagerInterface $manager): Response
+    public function myAccount(TableBookingRepository $tablebookingRepo,OrderRepository $orderRepo, Request $request, EntityManagerInterface $manager): Response
     {
         $user = $this->getUser();
-        //récupération des résa de tables de l'user par date  
-        $tableBookings = $repo->findBy(['booker'=>'user_id'], ['date'=>'DESC'],6, null );
+        //récupération des réservations de tables de l'user par date  
+        $tableBookings = $tablebookingRepo->findBy(['booker'=>'user_id'], ['date'=>'DESC'],6, null );
+        //récupération des commandes de repas de l'user par date
+        $orders = $orderRepo->findBy(['user'=>'user_id'], ['created_at'=>'DESC'],6, null );
             
             $comment = new Comment();
             $form = $this->createForm(CommentType::class, $comment);
@@ -88,7 +91,7 @@ class AccountController extends AbstractController
 
             if($form->isSubmitted() && $form->isValid()){
                 
-
+                //publication d'un commentaire
                 $comment->setRating($comment->getRating())
                 ->setContent($comment->getContent())
                 ->setAuthor($this->getUser());
@@ -103,7 +106,7 @@ class AccountController extends AbstractController
         
 
         return $this->render('account/profile.html.twig', [
-            'title' => 'Restaurant Shangrila | Mon compte', 'user' => $user, 'tableBookings'=>$tableBookings, 'comment'=>$comment, 'form'=>$form->createView()
+            'title' => 'Restaurant Shangrila | Mon compte', 'user' => $user, 'tableBookings'=>$tableBookings, 'comment'=>$comment, 'orders'=>$orders,'form'=>$form->createView()
         ]);
     }
 

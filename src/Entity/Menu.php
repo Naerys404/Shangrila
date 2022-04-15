@@ -33,10 +33,12 @@ class Menu
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'menu')]
     private $orders;
 
+
     public function __construct()
     {
         $this->meals = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->priceId = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -150,4 +152,5 @@ class Menu
 
         return $this;
     }
+   
 }
