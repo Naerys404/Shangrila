@@ -3,5 +3,172 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block body %}
-    <h1>Gestion des menus et plats</h1>
+    <section class="container-fluid">
+        <div class="row justify-content-center">
+          
+            <div class="col-md-12 jumbotron mt-2">
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="brown mb-2">{{title}}</h2>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-brown" data-bs-toggle="modal" data-bs-target="#AddMealModal">
+                               <i class="fa-solid fa-utensils"></i> Ajouter un plat
+                            </button>
+                        </div>
+                    </div>
+                      
+                <hr class="brown">
+                <div class="row">
+                    <div class="col-md-6">
+                    <h4 class="brown">Plats</h4>
+
+                <table class="table table-hover">
+                    <thead class="text-center table-header">
+                        <th scope="col">Id</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Editer</th>
+                        <th scope="col">Supprimer</th>
+                    </thead>
+                    <tbody>
+                    {% for meal in pagination.data %}
+                    <tr class="text-center">
+                        <td>{{meal.id}}</td>
+                        <td>{{meal.title}}</td>
+                        <td>{{meal.description}}</td>
+                        <td>{{meal.category}}</td>
+                        <td><img src="{{meal.image}}" alt="{{meal.image}}" class="img-fluid"></td>
+                        <td class="col-1 align-center">
+                            <a href="{{path('admin_meal_edit', {'id': meal.id })}}" class="btn btn-brown btn-sm"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                        </td>
+                        <td class="align-center">
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalMeal">
+                                <i class="fas fa-trash" aria-hidden="true"></i>
+                            </button> 
+                        </td>
+                    </tr>
+                    <!-- Modal de sécurité suppression plat-->
+                    <div class="modal fade" id="modalMeal" tabindex="-1" aria-labelledby="warningModalMeal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="warningModalMeal">Attention !</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Etes-vous sûr de vouloir supprimer ce plat ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <a href="{{path('admin_meal_delete', {'id': meal.id })}}" class="btn btn-danger">Supprimer</a> 
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                    </div>
+                    <div class="col-md-6">
+                         <h4 class="brown">Menus</h4>
+
+                <table class="table table-hover">
+                    <thead class="text-center table-header">
+                        <th scope="col">Id</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Editer</th>
+                        <th scope="col">Supprimer</th>
+                    </thead>
+                    <tbody>
+                    {% for menu in menus %}
+                    <tr class="text-center">
+                        <td class="col">{{menu.id}}</td>
+                        <td class="col">{{menu.title}}</td>
+                        <td class="col">{{menu.price}} &euro;</td>
+                        <td class="col-3">{{menu.description}}</td>
+                        <td class="col-2"><img src="{{menu.image}}" alt="{{menu.title}}" class="img-fluid"></td>
+                        <td class="col-1 align-center">
+                            <a href="{{path('admin_menu_edit', {'id': menu.id })}}" class="btn btn-brown btn-sm"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                        </td>
+                        <td class="align-center">
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalMenu">
+                                <i class="fas fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>           
+                    <!-- Modal de sécurité suppression menu-->
+                    <div class="modal fade" id="modalMenu" tabindex="-1" aria-labelledby="warningModalMenu" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="warningModalMenu">Attention !</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Etes-vous sûr de vouloir supprimer ce menu ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <a href="{{path('admin_menu_delete', {'id': menu.id })}}" class="btn btn-danger"> Supprimer</a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                    
+                    
+                    </div>
+                </div>
+                
+                {{pagination.display()}}
+            </div>
+        </div>
+
+            <!-- modal d'ajout de plat ou de menu -->
+            <div class="modal fade" id="AddMealModal" tabindex="-1" aria-labelledby="AddMealModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddMeal">Ajouter un plat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form) }}
+                    {{form_widget(form)}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                    {{form_end(form)}}
+                </div>
+                </div>
+            </div>
+            </div>
+
+
+    </section>
+
+
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+})
+
+    
+    </script>
 {% endblock %}
