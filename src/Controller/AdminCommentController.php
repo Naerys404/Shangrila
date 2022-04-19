@@ -13,10 +13,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminCommentController extends AbstractController
 {
+    //liste des commentaires
     #[Route('/admin/comments/{page<\d+>?1}', name: 'admin_comments_list')]
     public function index(Pagination $paginationService, $page): Response
     {
-          //liste des commentaire
+    
        $paginationService->setEntityClass(Comment::class)
                            ->setLimit(10)
                            ->setPage($page)
@@ -47,7 +48,7 @@ class AdminCommentController extends AbstractController
 
    }
 
-   //suppression des clients
+   //suppression des commentaires
    #[Route('/admin/comment/{id}/delete', name:'admin_comment_delete')]
    public function delete(Comment $comment, EntityManagerInterface $manager):Response{
       

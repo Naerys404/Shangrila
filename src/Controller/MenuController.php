@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MenuController extends AbstractController
 {
+    //affiche les menus
     #[Route('/menu', name: 'homeMenu')]
     public function index(MenuRepository $menuRepo): Response
     {
@@ -21,6 +22,7 @@ class MenuController extends AbstractController
         ]);
     }
 
+    //affiche le detail d'un menu en particulier + lien pour le commander
     #[Route('/menu/show/{id}', name:'showMenu')]
     public function show(Menu $menu){
 

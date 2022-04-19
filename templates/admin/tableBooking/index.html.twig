@@ -3,5 +3,66 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block body %}
-<h1>Réservations</h1>
+    <section class="container-fluid">
+        <div class="row justify-content-center">
+          
+            <div class="col-md-8 jumbotron mt-2">
+               <h2 class="brown mb-2">{{title}}</h2>
+                <hr class="brown">
+                <table class="table table-hover">
+                    <thead class="text-center table-header">
+                        <th scope="col">Id</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Horaire réservé</th>
+                        <th scope="col">Invités</th>
+                        <th scope="col">Editer</th>
+                        <th scope="col">Supprimer</th>
+                    </thead>
+                    <tbody>
+                    {% for tableBooking in pagination.data %}
+                    <tr class="text-center">
+                        <td>{{tableBooking.id}}</td>
+                        <td>{{tableBooking.booker.fullName}}</td>
+                        <td>{{tableBooking.date|date("d/m/Y")}}</td>
+                        <td>{{tableBooking.timeSheet}}</td>
+                        <td>{{tableBooking.guests}}</td>
+                        <td class="col-1">
+                            <a href="{{path('admin_tablebooking_edit', {'id': tableBooking.id })}}" class="btn btn-brown btn-sm"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBooking">
+                                <i class="fas fa-trash" aria-hidden="true"></i>
+                            </button>  
+                        </td>
+                    </tr>
+                       <!-- Modal de sécurité suppression réservation-->
+                    <div class="modal fade" id="modalBooking" tabindex="-1" aria-labelledby="warningModalBooking" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="warningModalBooking">Attention !</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Etes-vous sûr de vouloir supprimer cette réservation ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <a href="{{path('admin_tablebooking_delete', {'id': tableBooking.id })}}" class="btn btn-danger"> Supprimer</a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    {% endfor %}
+                    </tbody>
+            </table>
+
+                {{pagination.display()}}
+            </div>
+        </div>
+      
+                    
+    </section>
+
 {% endblock %}
