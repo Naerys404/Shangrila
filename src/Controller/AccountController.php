@@ -100,6 +100,8 @@ class AccountController extends AbstractController
                 $manager->flush();
 
                 $this->addFlash("success", "Votre commentaire a bien été enregistré.");
+
+                return $this->redirectToRoute('account_home');
             
         }
 

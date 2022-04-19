@@ -65,10 +65,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: false)]
     private $city;
 
-    #[ORM\OneToMany(mappedBy: 'booker', targetEntity: TableBooking::class)]
+    #[ORM\OneToMany(mappedBy: 'booker', targetEntity: TableBooking::class, orphanRemoval:true)]
     private $tableBookings;
 
-    #[ORM\OneToOne(mappedBy: 'author', targetEntity: Comment::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'author', targetEntity: Comment::class,orphanRemoval:true, cascade: ['persist', 'remove'])]
     private $comment;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)]

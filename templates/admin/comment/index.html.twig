@@ -3,5 +3,61 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block body %}
-<h1>Gestion des commentaires</h1>
+    <section class="container-fluid">
+        <div class="row justify-content-center">
+          
+            <div class="col-md-10 jumbotron mt-2">
+               <h2 class="brown mb-2">Gestion des commentaires</h2>
+                <hr class="brown">
+                <table class="table table-hover">
+                    <thead class="text-center table-header">
+                        <th scope="col">Id</th>
+                        <th scope="col">Auteur</th>
+                        <th scope="col">Note</th>
+                        <th scope="col">Public/Privé</th>
+                        <th scope="col">Commentaire</th>             
+                        <th scope="col">Date de création</th>
+                        <th scope="col">Editer</th>
+                        <th scope="col">Supprimer</th>
+                    </thead>
+                    <tbody>
+                    {% for comment in pagination.data %}
+                    <tr class="text-center">
+                        <td>{{comment.id}}</td>
+                        <td>{{comment.author.fullName}}</td>
+                        <td>
+                            {% if comment.rating == 1 %}
+                                <span class="badge bg-danger rounded">{{comment.rating}}</span>
+                            {% elseif comment.rating <= 3 %}
+                                <span class="badge bg-warning rounded">{{comment.rating}}</span>     
+                            {% elseif comment.rating > 3 %}
+                                <span class="badge bg-success rounded">{{comment.rating}}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if comment.publicView %}<span class="red">Public</span>
+                            {% else %}<span class="green">Privé</span>
+                            {% endif %}
+                        </td>
+
+                        <td>{{comment.content}}</td>
+                        
+                        <td >{{comment.createdAt|date('d/m/Y H:i' )}}</td>
+                        <td class="col-1">
+                            <a href="{{path('admin_comment_edit', {'id': comment.id })}}" class="btn btn-brown btn-sm"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                        </td>
+                        <td>
+                            <a href="{{path('admin_comment_delete', {'id': comment.id })}}" class="btn btn-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i></a>   
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+            </table>
+
+                {{pagination.display()}}
+            </div>
+        </div>
+
+    </section>
+
 {% endblock %}

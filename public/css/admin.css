@@ -40,3 +40,12 @@ section {
 .table-header {
     background-color: #bfa88b;
 }
+
+.red {
+    color:#BB2D3B;
+    font-weight:bold;
+}
+
+.green {
+    color:#019267;
+}

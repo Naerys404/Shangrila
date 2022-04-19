@@ -45,22 +45,18 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Comment[] Returns an array of Comment objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    //affichage des commentaires publics par ordre desc. triés par note
+    public function findByPublicView()
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
+            ->andWhere('c.publicView = 1')
+            ->orderBy('c.rating', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Comment

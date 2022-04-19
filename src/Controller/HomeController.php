@@ -7,6 +7,7 @@ use App\Entity\TableBooking;
 use App\Form\TableBookingType;
 use App\Repository\MealRepository;
 use App\Repository\MenuRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +18,14 @@ class HomeController extends AbstractController
 {
     //homePage + intégration de la réservation d'une table via la homepage
     #[Route('/', name: 'homePage')]
-    public function index(Request $request, EntityManagerInterface $manager, MenuRepository $menuRepo, MealRepository $mealRepo): Response
+    public function index(Request $request, EntityManagerInterface $manager, MenuRepository $menuRepo, MealRepository $mealRepo, CommentRepository $commentRepo): Response
     {
         //recuperations des != menus 
         $menus = $menuRepo->findAll();
         $meals = $mealRepo->findAll();
+
+        //recupération des commentaires activés comme publics par les clients
+        $comments = $commentRepo->findByPublicView();
 
         $user = $this->getUser();
         $tableBooking = new TableBooking();
@@ -48,7 +52,7 @@ class HomeController extends AbstractController
         }
         
         return $this->render('home/home.html.twig', [
-            'title' => 'Restaurant Shangrila | Accueil', 'form'=>$form->createView(), 'menu'=>$menus, 'meal'=>$meals
+            'title' => 'Restaurant Shangrila | Accueil', 'form'=>$form->createView(), 'menu'=>$menus, 'meal'=>$meals, 'comments'=>$comments
         ]);
     }
 

@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 use App\Repository\CommentRepository;
-use phpDocumentor\Reflection\Types\Nullable;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\HasLifecycleCallbacks()]
@@ -30,6 +29,10 @@ class Comment
 
     #[ORM\OneToOne(inversedBy: 'comment', targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $author;
+
+    //peut on afficher publiquement le commentaire ? Choix de l'utilisateur lors du formulaire
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $publicView;
 
     //création d'une date automatiquement lors de la création du commentaire
     #[ORM\PrePersist]
@@ -88,6 +91,18 @@ class Comment
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getPublicView(): ?bool
+    {
+        return $this->publicView;
+    }
+
+    public function setPublicView(?bool $publicView): self
+    {
+        $this->publicView = $publicView;
 
         return $this;
     }

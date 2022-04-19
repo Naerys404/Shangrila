@@ -7,6 +7,7 @@ use Faker\Factory;
 use App\Entity\Meal;
 use App\Entity\Menu;
 use App\Entity\User;
+use App\Entity\Comment;
 use App\Entity\TableBooking;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -24,7 +25,7 @@ class AppFixtures extends Fixture
 
         $faker = Factory::create("fr-FR");
 
-        //profil Admin
+        //profil Admin (pas de résa ni commentaires pour tester soi-même si besoin)
         $adminUser = new User();
         $adminUser->setFirstname('Naerys')
         ->setLastname('admin')
@@ -37,13 +38,16 @@ class AppFixtures extends Fixture
 
         $manager->persist($adminUser);
 
-        //profils User
+        //profils User + ajout d'un commentaire par user
         $users=[];
+        $comments=[];
 
         for($i=1; $i<=10; $i++){
 
             $user = new User();
+            $comment = new Comment();
            
+            //creation des users
             $hashedPassword = $this->hasher->hashPassword($user, "testtest");
             $user->setFirstname($faker->firstName())
                 ->setLastname($faker->lastname())
@@ -51,11 +55,23 @@ class AppFixtures extends Fixture
                 ->setPassword($hashedPassword)
                 ->setAddress($faker->streetAddress())
                 ->setPostalCode($faker->numberBetween(11000,95850))
-                ->setCity($faker->city());
+                ->setCity($faker->city())
+                ->setComment($comment);
 
-                $manager->persist($user);
+            
                 $users[]= $user;
-                $manager->flush($users);
+                $manager->persist($user);
+                
+
+                //creation des commentaires (1 par user) après avoir persisté les users pour obtenir les id
+                $comment->setAuthor($user)
+                ->setRating(random_int(0,5))
+                ->setContent($faker->sentence(15))
+                ->setPublicView(random_int(0,1));
+
+                $comments[]=$comment;
+                $manager->persist($comment);
+                $manager->flush($user);
         
         }
 
@@ -124,7 +140,7 @@ class AppFixtures extends Fixture
             $manager->flush($menus);
 
 
-             //creations de plats pour etoffer chaque menu
+             //creations de plats pour étoffer chaque menu
            
                 $meals = [];
 
