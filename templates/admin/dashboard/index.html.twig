@@ -3,5 +3,129 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block body %}
-<h1>DASHBOARD</h1>
+
+<main class="container-fluid dashboardAdmin">
+
+    <div class="row justify-content-center jumbotron ">
+        <div class="col mb-3">
+            <div class="card bg-info text-white text-center p-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa fa-users fa-2x" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-8">
+                            <h4 class="card-title h5">{{stats.users}} Clients</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mb-3">
+            <div class="card bg-success text-white text-center p-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa-solid fa-book-bookmark fa-2x"></i>
+                        </div>
+                        <div class="col-8">
+                            <h4 class="card-title h5">{{stats.tableBookings}} Réservations</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        
+        </div>
+        <div class="col mb-3">
+            <div class="card bg-marron text-white text-center p-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                           <i class="fa-solid fa-bowl-rice fa-2x"></i>
+                        </div>
+                        <div class="col-8">
+                            <h4 class="card-title h5">{{stats.meals}} Plats proposés</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        
+        </div>
+        <div class="col mb-3">
+            <div class="card bg-warning text-white text-center p-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa-solid fa-star fa-2x"></i>
+                        </div>
+                        <div class="col-8">
+                            <h4 class="card-title h5">{{stats.comments}} Avis</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        
+        </div>
+
+       <div class="row mx-auto">
+            <div class="col">
+                <div class="alert alert-success my-3">
+                   <h4 class="alert-heading"><i class="fa-solid fa-arrow-trend-up"></i> Les meilleurs commentaires</h4>
+                
+                    <table class="table table-hover">
+                        <thead>
+                            <th>Id</th>
+                            <th>Commentaire</th>
+                            <th>Note</th>
+                        </thead>
+                        <tbody>
+                        {% for comment in bestComs %}
+                            <tr>
+                                <td>{{comment.id}}</td>
+                                <td>{{comment.content}}</td>
+                                <td class="text-center">
+                                    {{comment.rating}}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody> 
+                    </table>
+                </div>
+            </div>
+            <div class="col">
+                <div class="alert alert-warning my-3">
+                    <h4 class="alert-heading"> <i class="fa-solid fa-arrow-trend-down"></i> Les pires commentaires</h4>
+                
+                     <table class="table table-hover">
+                        <thead>
+                            <th>Id</th>
+                            <th>Commentaire</th>
+                            <th>Note</th>
+                        </thead>
+                        <tbody>
+                        {% for comment in worstComs %}
+                           <tr>
+                                <td>{{comment.id}}</td>
+                                <td>{{comment.content}}</td>
+                                <td class="text-center">
+                                    {{comment.rating}}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody> 
+                    </table>
+                </div>
+            </div>
+
+       </div>
+    
+    
+    </div>
+
+
+</main>
 {% endblock %}

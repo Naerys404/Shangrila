@@ -34,7 +34,8 @@ header a.nav-link {
 }
 
 section {
-    background: url("../img/table-dark.jpg") no-repeat fixed 0 0 #000;
+    background: url("../img/table-dark.jpg") no-repeat 0 0 #000;
+    background-size: cover;
 }
 
 .table-header {
@@ -48,4 +49,13 @@ section {
 
 .green {
     color:#019267;
+}
+
+.dashboardAdmin {
+    background: url("../img/fond3.jpg") no-repeat 0 0 #000;
+    background-size: cover;
+}
+
+.jumbotron {
+    margin-top:0;
 }

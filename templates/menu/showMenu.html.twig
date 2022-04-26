@@ -34,17 +34,10 @@
                             <h3><strong>{{menu.price}}<i class="fa fa-eur" aria-hidden="true"></i></strong></h3>
                         </div>
                         <hr class="brown">
-                        {% if app.user %}
                         <div class="text-center">
-                                <a href="#" class="btn btn-brown btn-lg">Commander</a>
+                                <a href="{{path('payment', {'id':menu.id})}}" class="btn btn-brown btn-lg">Commander</a>
                         </div>
-                        {% else %}
-                            <div class="mt-4 text-center">
-                                <p class="brow"><strong>Vous devez être connecté pour commander.</strong></p>
-                                <a href="{{path('account_login')}}" class="card-link btn btn-brown">Se connecter</a>         
-                            </div>
-                        {% endif %}
-                      
+
                     </div>
                     <div class='d-flex justify-content-end'>
                    <a href="{{path('homeMenu')}}" class="btn btn-outline-brown m-1">Retour aux menus</a>
@@ -57,4 +50,5 @@
     
     </section>
 {% endblock %}
+
 

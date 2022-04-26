@@ -69,21 +69,20 @@
 
                             {% if user.orders|length > 0 %}
                                     {% for order in user.orders %}
-                                       
+
                                     <div class="card" style="width: 18rem;">
                                         <img src="" class="card-img-top" alt="titre">
                                         <div class="card-body">
-                                            <h5 class="card-title">titre menu</h5>
+                                            <h5 class="card-title">menu title</h5>
                                             <p class="card-text"></p>
                                         </div>
                                         <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">Référence: {{order.reference}}</li>
-                                            <li class="list-group-item"></li>
-                                            <li class="list-group-item">Commandé le : {{order.createdAt|date('d-m-Y')}}</li>
+                                            <li class="list-group-item"><b>Référence:</b> {{order.reference}}</li>
+                                            <li class="list-group-item"><b>Adresse de livraison:</b> <p>{{order.deliveryAddress|raw }}</p></li>
+                                            <li class="list-group-item"><b>{{order.price}} <i class="fa-solid fa-euro-sign"></i></b></li>
                                         </ul>
                                         <div class="card-body">
-                                            <p>prix</p>
-                                            <p>commandé le</p>
+                                            <li class="list-group-item"><b>Commandé le:</b> {{order.createdAt|date('d-m-Y h:m')}}</li>
                                         </div>
                                 </div>
                                     {% endfor %}

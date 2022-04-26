@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Menu;
 use App\Entity\User;
 use App\Entity\Comment;
 use App\Form\AccountType;
@@ -84,6 +85,7 @@ class AccountController extends AbstractController
         $tableBookings = $tablebookingRepo->findBy(['booker'=>'user_id'], ['date'=>'DESC'],6, null );
         //récupération des commandes de repas de l'user par date
         $order = $orderRepo->findBy(['user'=>'user_id'], ['created_at'=>'DESC'],6, null );
+
             
             $comment = new Comment();
             $form = $this->createForm(CommentType::class, $comment);
@@ -105,7 +107,8 @@ class AccountController extends AbstractController
             
         }
 
-        
+
+
 
         return $this->render('account/profile.html.twig', [
             'title' => 'Restaurant Shangrila | Mon compte', 'user' => $user, 'tableBookings'=>$tableBookings, 'comment'=>$comment, 'order'=>$order,'form'=>$form->createView()

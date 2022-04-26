@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block body %}
+    {% include 'inc/nav-header.html.twig' %}
+   
+    <section class="container-fluid ">
+    {% include './inc/flashs.html.twig' %}
+     
+        <div class="row justify-content-center">
+          
+            <div class="col-md-8 jumbotron text-center">
+                    <h4>Paiement annulé</h4>
+                    <hr class="brown">
+                        
+                    <div class='d-flex justify-content-end'>
+                   <a href="{{path('homeMenu')}}" class="btn btn-outline-brown m-1">Retour aux menus</a>
+                   </div>
+                </div>
+
+                
+            </div>            
+    </div>
+    
+    </section>
+{% endblock %}
+
+
+

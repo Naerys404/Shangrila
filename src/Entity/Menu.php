@@ -95,6 +95,7 @@ class Menu
         return $this->meals;
     }
 
+
     public function addMeal(Meal $meal): self
     {
         if (!$this->meals->contains($meal)) {

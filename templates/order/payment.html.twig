@@ -1,62 +1,150 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{title}}{% endblock %}
+{% block title %}Paiement{% endblock %}
 
 {% block body %}
-    {% include 'inc/nav-header.html.twig' %}
-   
-    <section class="container-fluid showMenu">
-    {% include './inc/flashs.html.twig' %}
-     
-        <div class="row justify-content-center">
-          
-            <div class="col-md-8 jumbotron">
-            
-                    <h1 class="h2 mb-2">Formule "{{menu.title}}"</h1>
-                     <p class="card-text">{{menu.description}}</p>
-                
-                <hr class="brown">
-                <div class="row">
-                    <div class="mt-4 col-md-5 mx-auto">
-                        <img src="{{menu.image}}" class="card-img-top" alt="{{menu.title}}">         
-                    </div>
-               
-                    <div class="col-md-5 mx-auto">
-                    
-                    <!-- affiche les plats du menu selectionné -->
-                        <ul class="list-group list-group-flush">
-                                {% for meal in menu.meals %}
-                                    <li class="list-group-item">{{meal.title}}<p><small><i>{{meal.description}}</i></small></p></li> 
-                                {% endfor %}                
-                            </ul>
+    <section class="features-icons bg-light text-center">
 
-                        <div class="d-flex justify-content-center">
-                            <h3><strong>{{menu.price}}<i class="fa fa-eur" aria-hidden="true"></i></strong></h3>
-                        </div>
-                        <hr class="brown">
-                        {% if app.user %}
-                        <div class="text-center">
-                            <form action="{{path('checkout', {'id':menu.id})}}" method="POST">
-                                <button type="submit" class="btn btn-brown btn-lg">Commander</button>
-                            </form>
-                        </div>
-                        {% else %}
-                            <div class="mt-4 text-center">
-                                <p class="brow"><strong>Vous devez être connecté pour commander.</strong></p>
-                                <a href="{{path('account_login')}}" class="card-link btn btn-brown">Se connecter</a>         
+        <div class="container col-md-4">
+
+            <div class="row">
+                <div class="col">
+
+                    <div class="card-body">
+                        <form action="{{path('subscription_payment', {'id': menu.id})}}" method="POST" id="payment-form">
+                            <div class="form-row">
+                                <div id="card-elements">
+                                
+                                </div>
+
+                                <script src="https://js.stripe.com/v3"></script>
+
+                                <div id="card-errors" role="alert">
+        
+                                </div>
                             </div>
-                        {% endif %}
-                      
+                            <button class="btn btn-brown mt-4"> Commander en livraison
+                            </button>
+                    
+                        </form>
+                    
                     </div>
-                    <div class='d-flex justify-content-end'>
-                   <a href="{{path('homeMenu')}}" class="btn btn-outline-brown m-1">Retour aux menus</a>
-                   </div>
                 </div>
+            
+            </div>
 
-                
-            </div>            
-    </div>
-    
+        </div>
     </section>
+   
 {% endblock %}
 
+{% block javascripts %}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+
+<script>
+
+    {% if app_environement == 'dev' %}
+        var stripeToken = '{{ stripe_public_key_test }}';
+    {% else %}
+        var stripeToken = '{{ stripe_public_key_live }}';
+    {% endif %}
+
+    var stripe = Stripe(stripeToken);
+    var elements = stripe.elements();
+    var subscription = "{{ menu.id }}";
+    var clientSecret = "{{ intentSecret }}";
+    var cardholderName = "{{ app.user.lastname }}";
+    var cardholderEmail = "{{ app.user.email }}";
+    var userLine1 = "{{ app.user.address }}";
+    var userPostalCode = "{{ app.user.postalCode }}";
+    var userCity = "{{ app.user.city }}";
+
+    console.log(clientSecret);
+
+
+    var styleCustom = {
+    	base: {
+    		fontSize: '16px',
+            color: '#a5bbb1',
+           
+        }
+    }
+
+    //montage du form à l'objet stripe (on associe le card.mount à un id)
+    var card = elements.create('card',{style: styleCustom } );
+    card.mount("#card-elements");
+
+    //Ecoute de l'evenement quand il y aura un changement dans le form pour les msg d'erreur
+    card.addEventListener('change', function(event){
+    	var displayError = document.getElementById('card-errors');
+
+    	if(event.error) {
+		    displayError.textContent = event.error.message;
+        } else {
+		    displayError.textContent = '';
+        }
+    });
+
+    var form = document.getElementById('payment-form');
+
+    form.addEventListener('submit', function(event){
+    	event.preventDefault();
+
+	    stripe.handleCardPayment(
+		    clientSecret,
+		    card,
+            {
+            	payment_method_data: {
+		            billing_details: {
+		            	name: cardholderName,
+                        email: cardholderEmail,
+                        address : {
+                            line1: userLine1,
+                            postal_code: userPostalCode,
+                            city: userCity
+                        }
+                    }
+                }
+            }
+        ).then((result) => {
+        	if(result.error) {
+        		// Display error
+            } else if('paymentIntent' in result) {
+        		console.log('Result : ',result);
+        		stripeTokenHandler(result.paymentIntent);
+		        console.log('Result paymentIntent : ',result.paymentIntent);
+            }
+        })
+    });
+
+    function stripeTokenHandler(intent) {
+    	var form = document.getElementById('payment-form');
+    	var InputIntentId = document.createElement('input');
+    	var InputIntentPaymentMethod = document.createElement('input');
+	    var InputIntentStatus = document.createElement('input');
+	    var InputSubscription = document.createElement('input');
+
+	    InputIntentId.setAttribute('type', 'hidden');
+	    InputIntentId.setAttribute('name', 'stripeIntentId');
+	    InputIntentId.setAttribute('value', intent.id);
+
+	    InputIntentPaymentMethod.setAttribute('type', 'hidden');
+	    InputIntentPaymentMethod.setAttribute('name', 'stripeIntentPaymentMethod');
+	    InputIntentPaymentMethod.setAttribute('value', intent.payment_method);
+
+	    InputIntentStatus.setAttribute('type', 'hidden');
+	    InputIntentStatus.setAttribute('name', 'stripeIntentStatus');
+	    InputIntentStatus.setAttribute('value', intent.status);
+
+	    InputSubscription.setAttribute('type', 'hidden');
+	    InputSubscription.setAttribute('name', 'subscription');
+	    InputSubscription.setAttribute('value', subscription);
+
+	    form.appendChild(InputIntentId);
+	    form.appendChild(InputIntentPaymentMethod);
+	    form.appendChild(InputIntentStatus);
+	    form.appendChild(InputSubscription);
+	    form.submit();
+    }
+</script>
+{% endblock %}
