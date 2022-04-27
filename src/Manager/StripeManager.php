@@ -93,5 +93,7 @@ class StripeManager
         $this->em->persist($order);
         $this->em->flush();
 
+        return $order->getReference();
+
     }
 }

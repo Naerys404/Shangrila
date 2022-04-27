@@ -90,7 +90,7 @@ class Order
     /**
      * @return Collection<int, Menu>
      */
-    public function getMenu(): Collection
+    public function getMenu()
     {
         return $this->menu;
     }
@@ -103,7 +103,6 @@ class Order
 
         return $this;
     }
-
 
 
     public function removeMenu(Menu $menu): self

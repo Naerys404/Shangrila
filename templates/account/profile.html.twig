@@ -67,25 +67,31 @@
                             {# espace historique de commande #}
                             <h4 class="mb-4">Historique de mes commandes</h4>
 
+                            <div class="row mx-auto">
+                           
                             {% if user.orders|length > 0 %}
                                     {% for order in user.orders %}
-
-                                    <div class="card" style="width: 18rem;">
-                                        <img src="" class="card-img-top" alt="titre">
-                                        <div class="card-body">
-                                            <h5 class="card-title">menu title</h5>
-                                            <p class="card-text"></p>
+                                <div class="col-md-3">
+                                    <div class="card mb-3">
+                                        <div class="thumbnailsOrder">
+                                            <img src="{{order.menu.image}}" class="card-img-top img-fluid" alt="titre">
+                                        </div>
+                                        <div class="card-body orderDescription">
+                                            <h5 class="card-title">Formule "{{order.menu.title}}"</h5>
                                         </div>
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item"><b>Référence:</b> {{order.reference}}</li>
-                                            <li class="list-group-item"><b>Adresse de livraison:</b> <p>{{order.deliveryAddress|raw }}</p></li>
-                                            <li class="list-group-item"><b>{{order.price}} <i class="fa-solid fa-euro-sign"></i></b></li>
+                                            <li class="list-group-item"><b>Prix: {{order.price}} </b><i class="fa-solid fa-euro-sign"></i></li>
+                                            <li class="list-group-item"><b>Adresse de livraison:</b> <p>{{order.deliveryAddress|raw }}</p></li><li
+                                            class="list-group-item"><b>Commandé le:</b><br> {{order.createdAt|date('d-m-Y')}} à {{order.createdAt|date('H:i')}}</li>
                                         </ul>
                                         <div class="card-body">
-                                            <li class="list-group-item"><b>Commandé le:</b> {{order.createdAt|date('d-m-Y h:m')}}</li>
-                                        </div>
+                                            <a href="{{path('subscription_payment', {'id':order.menu.id})}}" class='btn btn-brown'>Commander à nouveau</a>
+                                       </div>
                                 </div>
+                            </div>
                                     {% endfor %}
+                            </div>
                                 {% else %}
                                     <div class="alert alert-warning">Vous n'avez pas encore passé de commande.</div>
                                 {% endif %}

@@ -345,6 +345,15 @@ section.profile .commentDiv {
     -webkit-box-shadow: 0px 8px 18px -3px rgba(140,140,140,0.4); 
     box-shadow: 0px 8px 18px -3px rgba(140,140,140,0.4);
 }
+section.profile .thumbnailsOrder {
+    max-height:150px;
+}
+section.profile .orderDescription{
+    background-color: rgba(253, 253, 253, 0.8);
+}
+section.profile .card > .list-group {
+    border-top:0;
+}
 
                  /* ACCOUNT UPDATE*/
 
@@ -443,6 +452,26 @@ section.contact {
     background: url("../img/fond3.jpg") no-repeat #000;
     background-size: cover;
 }
+
+/* PAYMENT PAGE*/
+.stripeDiv {
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+a.poweredByStripe {
+    max-height: 20px;
+}
+
+.btn-blueStripe {
+    background-color: #847DFF;
+    color:#fff;
+}
+.btn-blueStripe:hover {
+    background-color: #fff;
+    color:#847DFF;
+    border: 1px solid #847DFF;
+}
+
 
 /* bundles pages 404 et 403 */
 main.notFound, main.accessDenied {

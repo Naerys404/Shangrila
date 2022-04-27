@@ -3,38 +3,77 @@
 {% block title %}Paiement{% endblock %}
 
 {% block body %}
-    <section class="features-icons bg-light text-center">
+{% include 'inc/nav-header.html.twig' %}
+   
+    <section class="container-fluid showMenu">
+    {% include './inc/flashs.html.twig' %}
+     
+        <div class="row justify-content-center">
+          
+            <div class="col-md-8 jumbotron">
+            
+                    <h1 class="h2 mb-2">Récapitulatif et paiement de votre commande</h1>
+                
+                <hr class="brown">
+                <div class="row">
+                    <div class="mt-4 col-md-5 mx-auto">
+                        <img src="{{menu.image}}" class="card-img-top" alt="{{menu.title}}"> 
+                    </div>
+               
+                    <div class="col-md-5 mx-auto">
+                    <!-- Détail de la commande -->
+                
+                    <h4>Formule {{menu.title}}</h4>
+                    <hr class="brown">
+                      <ul class="list-group list-group-flush">
+                            {% for meal in menu.meals %}
+                                <li class="list-group-item">{{meal.title}}<p><small><i>{{meal.description}}</i></small></p></li> 
+                            {% endfor %}
+                            <li class="list-group-item h4">{{menu.price}} <i class="fa fa-eur" aria-hidden="true"></i>
+                            </li>
+                        </ul>
 
-        <div class="container col-md-4">
+                   
 
-            <div class="row">
-                <div class="col">
-
-                    <div class="card-body">
-                        <form action="{{path('subscription_payment', {'id': menu.id})}}" method="POST" id="payment-form">
-                            <div class="form-row">
-                                <div id="card-elements">
-                                
-                                </div>
-
-                                <script src="https://js.stripe.com/v3"></script>
-
-                                <div id="card-errors" role="alert">
-        
-                                </div>
-                            </div>
-                            <button class="btn btn-brown mt-4"> Commander en livraison
-                            </button>
+                    <div class="col stripeDiv">
+                     <div class="text-center"> 
+                        <a href="https://stripe.com/fr" class="poweredByStripe" target="_blank">
+                                <img src="https://cdn.brandfolder.io/KGT2DTA4/at/rvgw5pc69nhv9wkh7rw8ckv/Powered_by_Stripe_-_blurple.png?width=132&height=30" alt="paiement sécurisé par Stripe">
+                        </a>
+                    </div>
                     
-                        </form>
-                    
+                        <div class="card-body">
+
+                            <form action="{{path('subscription_payment', {'id': menu.id})}}" method="POST" id="payment-form">
+                                <div class="form-row">
+                                    <div id="card-elements"></div>
+
+                                    <script src="https://js.stripe.com/v3"></script>
+
+                                    <div id="card-errors" role="alert"></div>
+
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-blueStripe mt-4">Paiement de la commande
+                                </button>
+                                </div>
+                            </form>
+                        
+                        </div>
                     </div>
                 </div>
-            
-            </div>
+                    <div class='d-flex justify-content-end'>
+                   <a href="{{path('homeMenu')}}" class="btn btn-outline-brown m-1">Annuler</a>
+                   </div>
 
+                </div>
+
+                
+            </div>            
         </div>
+    
     </section>
+
    
 {% endblock %}
 
