@@ -37,6 +37,11 @@ class Stats{
         return $this->manager->createQuery('SELECT COUNT(c) FROM App\Entity\Comment c')->getSingleScalarResult();
     }
 
+    //nombre de commandes
+    public function getOrdersCount(){
+        return $this->manager->createQuery('SELECT COUNT(o) FROM App\Entity\Order o')->getSingleScalarResult();
+    }
+
     // on récupère TOUTES les stats qui concernent les nombres d'user/ad/booking et comments => compactage dans le controller
     public function getStats(){
         $users = $this->getUsersCount();
@@ -44,8 +49,9 @@ class Stats{
         $meals = $this->getMealsCount();
         $menus = $this->getMenusCount();
         $comments = $this->getCommentsCount();
+        $orders = $this->getOrdersCount();
 
-        return compact('users','tableBookings', 'meals', 'menus', 'comments');
+        return compact('users','tableBookings', 'meals', 'menus', 'comments', 'orders');
     }
 
     //récupération des commentaires, avec en param 'ASC' ou 'DESC' pour avoir les pires et les meilleures 

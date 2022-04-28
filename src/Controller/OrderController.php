@@ -10,11 +10,11 @@ use App\Entity\Order;
 use App\Manager\StripeManager;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class OrderController extends AbstractController
@@ -59,15 +59,19 @@ class OrderController extends AbstractController
         return $this->redirectToRoute('payment', ['id'=>$menu->getId()]);
     }
 
-    //paiement réussi,  page récapitulative
+    //paiement réussi,  page récapitulative ( on limite l'accès de la page récapitulative au propriétaire de la commande)
     #[Route('/order/payment/{id}/success/{orderReference}', name:"success_payment")]
-    #[isGranted('ROLE_USER')]
+    #[IsGranted('ROLE_USER')]
     public function success(Menu $menu, OrderRepository $repo, $orderReference){
 
+        $order = $repo->findOneBy(array('reference' => $orderReference, 'user'=>$this->getUser()));
 
-        $order = $repo->findOneBy(array('reference' => $orderReference));
+        //si $order est null : pas de correlation entre l'user actuel et la référence demandée => on redirige vers l'accueil
+        if($order == null ){
+            return $this->redirectToRoute('homePage');
+        }
 
-        return $this->render('order/success.html.twig',['title'=>'Restaurant Shangrila | Commande validée','order'=>$order, 'menu'=>$menu, 'user'=>$this->getUser() ]);
+        return $this->render('order/success.html.twig',['title'=>'Restaurant Shangrila | Commande validée','order'=>$order, 'menu'=>$menu, 'user'=>$this->getUser()]);
     }
 
 }

@@ -54,7 +54,14 @@ class Order
     #[ORM\Column(type: 'float')]
     private $price;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $deliveredStatus;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $updated_at;
+
     #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     public function prePersist(){
           if(empty($this->createdAt)){
                 $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
@@ -62,6 +69,10 @@ class Order
            if(empty($this->reference)){
                $this->reference = uniqid();
            }
+            
+           $this->updated_at = new \DateTime('now', new \DateTimeZone('Europe/Paris')); 
+           
+           
     }
 
     public function __construct()
@@ -251,6 +262,18 @@ class Order
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getDeliveredStatus(): ?bool
+    {
+        return $this->deliveredStatus;
+    }
+
+    public function setDeliveredStatus(?bool $deliveredStatus): self
+    {
+        $this->deliveredStatus = $deliveredStatus;
 
         return $this;
     }

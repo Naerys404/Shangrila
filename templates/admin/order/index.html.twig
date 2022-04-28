@@ -3,5 +3,98 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block body %}
-<h1>Commandes et Livraisons</h1>
+    <section class="container-fluid">
+        <div class="row justify-content-center">
+          
+            <div class="col-md-12 jumbotron mt-2">
+               <h2 class="brown mb-2">Gestion des commandes et livraisons</h2>
+                <hr class="brown">
+                <table class="table table-hover">
+                    <thead class="text-center table-header">
+                        <th scope="col">Id</th>
+                        <th scope="col">Référence</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Date de commande</th>
+                        <th scope="col">Date de modification</th>
+                        <th scope="col">Menu</th>             
+                        <th scope="col">Prix</th>
+                        <th scope="col">Adresse de livraison</th>
+                        <th scope="col">Statut du paiement</th>
+                        <th scope="col">Moyen de paiement</th>
+                        <th scope="col">Livraison</th>
+                        <th scope="col">Editer</th>
+                        <th scope="col">Supprimer</th>
+                    </thead>
+                    <tbody>
+                    {% for order in pagination.data %}
+                    <tr class="text-center">
+                        <td>{{order.id}}</td>
+                        <td>{{order.reference}}</td>
+                        <td>{{order.user.fullName}}</td>
+                        <td>{{order.createdAt|date('d/m/Y H:i' )}}</td>
+                        <td>
+                        {# si la date de creation == date d'update => pas de modification réalisée #}
+                        {% if order.updatedAt == order.createdAt %}
+                            <i><small>Commande non modifiée</small></i>
+                        {% else %}
+                        {# si les dates sont différentes => la commande a été modifiée #}
+                            {{order.updatedAt|date('d/m/Y H:i' )}}
+                        {% endif %}
+                        </td>
+                        <td>{{order.menu}}</td>
+                        <td class="col-1">{{order.price}} &euro;</td>
+                        <td class="col-2">{{order.deliveryAddress|raw}}</td>
+
+                        {% if order.statusStripe == 'succeeded'%}
+                            <td><span class="badge bg-success rounded">{{order.statusStripe}}</span></td>
+                        {% else %}
+                            <td><span class="badge bg-danger rounded">{{order.statusStripe}}</span></td>
+                        {% endif %}
+                        
+                        <td>{{order.brandStripe}}</td>
+                        {% if order.deliveredStatus %}
+                            <td class="green"><i class="fa-solid fa-square-check fa-2x"></i></td>
+                        {% else %}
+                        <td>
+                            <a href="{{path('admin_order_delivered', {'id': order.id })}}" class="btn btn-warning btn-sm text-white"><i class="fa-solid fa-hourglass"></i></i></a>  
+                        </td>
+                        {% endif %}
+                    
+                        <td class="col-1">
+                            <a href="{{path('admin_order_edit', {'id': order.id })}}" class="btn btn-brown btn-sm"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalOrder">
+                                <i class="fas fa-trash" aria-hidden="true"></i>
+                            </button> 
+                        </td>
+                    </tr>
+                    <!-- Modal de sécurité suppression commande -->
+                    <div class="modal fade" id="modalOrder" tabindex="-1" aria-labelledby="warningModalOrder" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="warningModalOrder">Attention !</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Etes-vous sûr de vouloir supprimer cette commande ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <a href="{{path('admin_order_delete', {'id': order.id })}}" class="btn btn-danger">Supprimer</a> 
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    {% endfor %}
+                    </tbody>
+            </table>
+
+                {{pagination.display()}}
+            </div>
+        </div>
+
+    </section>
+
 {% endblock %}

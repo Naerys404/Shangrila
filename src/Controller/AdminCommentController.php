@@ -48,7 +48,7 @@ class AdminCommentController extends AbstractController
 
    }
 
-   //suppression des commentaires
+   //suppression d'un commentaire'
    #[Route('/admin/comment/{id}/delete', name:'admin_comment_delete')]
    public function delete(Comment $comment, EntityManagerInterface $manager):Response{
       
