@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Menu;
 use App\Entity\TableBooking;
 use App\Form\TableBookingType;
+use App\Repository\BlogRepository;
 use App\Repository\MealRepository;
 use App\Repository\MenuRepository;
 use App\Repository\CommentRepository;
@@ -18,7 +19,7 @@ class HomeController extends AbstractController
 {
     //homePage + intégration de la réservation d'une table via la homepage
     #[Route('/', name: 'homePage')]
-    public function index(Request $request, EntityManagerInterface $manager, MenuRepository $menuRepo, MealRepository $mealRepo, CommentRepository $commentRepo): Response
+    public function index(Request $request, EntityManagerInterface $manager, MenuRepository $menuRepo, MealRepository $mealRepo, CommentRepository $commentRepo, BlogRepository $blogRepo): Response
     {
         //recuperations des != menus 
         $menus = $menuRepo->findAll();
@@ -26,6 +27,9 @@ class HomeController extends AbstractController
 
         //recupération des commentaires activés comme publics par les clients
         $comments = $commentRepo->findByPublicView();
+
+        //récupération des articles de blog
+        $blogs = $blogRepo->findByDate();
 
         $user = $this->getUser();
         $tableBooking = new TableBooking();
@@ -52,7 +56,7 @@ class HomeController extends AbstractController
         }
         
         return $this->render('home/home.html.twig', [
-            'title' => 'Restaurant Shangrila | Accueil', 'form'=>$form->createView(), 'menu'=>$menus, 'meal'=>$meals, 'comments'=>$comments
+            'title' => 'Restaurant Shangrila | Accueil', 'form'=>$form->createView(), 'menu'=>$menus, 'meal'=>$meals, 'comments'=>$comments, 'blog'=>$blogs
         ]);
     }
 

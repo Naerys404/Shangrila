@@ -1,0 +1,99 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block body %}
+    <section class="container-fluid">
+        <div class="row justify-content-center">
+          
+            <div class="col-md-10 jumbotron mt-2">
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="brown mb-2">{{title}}</h2>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-brown" data-bs-toggle="modal" data-bs-target="#AddBlogModal">
+                               <i class="fa-solid fa-pen-nib"></i> Ajouter un article
+                            </button>
+                        </div>
+                    </div>             
+                <hr class="brown">
+                <div class="row">
+                    <div class="col">  
+                <table class="table table-hover">
+                    <thead class="text-center table-header">
+                        <th scope="col">Id</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Auteur</th>
+                        <th scope="col">Contenu</th>    
+                        <th scope="col">Image</th>
+                        <th scope="col">Editer</th>
+                        <th scope="col">Supprimer</th>
+                    </thead>
+                    <tbody>
+                    {% for blog in pagination.data %}
+                    <tr class="text-center">
+                        <td>{{blog.id}}</td>
+                        <td class="col-2">{{blog.title}}</td>
+                        <td>{{blog.author}}</td>
+                        <td class="col text-start">{{blog.content|raw}}</td>
+                        <td class="col-2"><img src="{{blog.image}}" alt="{{blog.image}}" class="img-fluid"></td>
+                        <td class="col-1 align-center">
+                            <a href="{{path('admin_blog_edit', {'id': blog.id })}}" class="btn btn-brown btn-sm"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                        </td>
+                        <td class="align-center">
+                           <a href="{{path('admin_blog_delete', {'id': blog.id })}}" class="btn btn-danger btn-sm"> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                    </div>
+                    
+                </div>
+                
+                {{pagination.display()}}
+            </div>
+        </div>
+
+            <!-- modal d'ajout d'article -->
+            <div class="modal fade" id="AddBlogModal" tabindex="-1" aria-labelledby="AddBlogModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddBlog">Ajouter un article</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form) }}
+                    {{form_widget(form)}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                    {{form_end(form)}}
+                </div>
+                </div>
+            </div>
+            </div>
+
+
+    </section>
+
+
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+})
+
+    
+    </script>
+{% endblock %}

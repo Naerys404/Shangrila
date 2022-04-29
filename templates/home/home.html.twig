@@ -238,45 +238,20 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eligendi possimus molestiae iste maiores cupiditate quibusdam corporis voluptatum excepturi dolores ipsam nostrum cumque ex eum in, odio harum. Corrupti, incidunt!<p>
             </div>
           </div>
+          {% for blog in blog %}
             <article class="col-3">
               <div class="card">
-                <img src="img/news-1.jpg" class="card-img-top" alt="news-1">
+                <img src="{{blog.image}}" class="card-img-top" alt="{{blog.title}}">
                 <div class="card-body">
-                  <h5 class="card-title">Lorem Ipsum</h5>
-                  <small><p class="card-text">10 juin 2020 by Peter Parker</p></small>
-                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, cupiditate fuga. Totam, soluta laborum sequi quae modi eaque veniam? Atque, voluptatibus voluptates id ipsum recusandae sequi doloremque odit dolor et. </p>
+                  <h5 class="card-title">{{blog.title}}</h5>
+                  <small><p class="card-text">{{blog.createdAt|date("d-m-Y H:i")}} par {{blog.author}}</p></small>
+                  <p class="card-text">{{blog.content|u.truncate(50, '...', false)}}</p>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
-                  <small><a href="#">+ Détails</a></small>
-                  <small>10 likes</small>
+                  <small><a href="{{path('blog_show', {'id':blog.id})}}" class="stretched-link">+ Détails</a></small>
                 </div>
             </article>
-            <article class="col-3">
-              <div class="card">
-                <img src="img/news-2.jpg" class="card-img-top" alt="news-2">
-                <div class="card-body">
-                  <h5 class="card-title">Lorem Ipsum</h5>
-                  <small><p class="card-text">10 juin 2020 by Peter Parker</p></small>
-                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, cupiditate fuga. Totam, soluta laborum sequi quae modi eaque veniam? Atque, voluptatibus voluptates id ipsum recusandae sequi doloremque odit dolor et.</p>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                  <small><a href="#">+ Détails</a></small>
-                  <small>10 likes</small>
-                </div>
-            </article>
-            <article class="col-3">
-              <div class="card">
-                <img src="img/news-3.jpg" class="card-img-top" alt="news-3">
-                <div class="card-body">
-                  <h5 class="card-title">Lorem Ipsum</h5>
-                  <small><p class="card-text">10 juin 2020 by Peter Parker</p></small>
-                  <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa eos quae nulla itaque, dolorem autem similique necessitatibus ut nostrum doloremque facere illum assumenda, ipsa deserunt perferendis id ea sequi placeat..</p>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                  <small><a href="#">+ Détails</a></small>
-                  <small>10 likes</small>
-                </div>
-            </article>
+            {% endfor %}
             
         </section>
         <section id="footerLinks" class="row">

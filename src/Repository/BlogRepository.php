@@ -45,22 +45,26 @@ class BlogRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Blog[] Returns an array of Blog objects
-    //  */
-    /*
-    public function findByExampleField($value)
+  
+    public function findByDate()
     {
         return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('b.created_at', 'DESC')
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
+    public function findByDateNoLimitResults()
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.created_at', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
 
     /*
     public function findOneBySomeField($value): ?Blog
