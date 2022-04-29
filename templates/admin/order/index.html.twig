@@ -37,7 +37,7 @@
                         {% if order.updatedAt == order.createdAt %}
                             <i><small>Commande non modifiée</small></i>
                         {% else %}
-                        {# si les dates sont différentes => la commande a été modifiée #}
+                        {# si les dates sont différentes => la commande a été livrée ou modifiée : si pas de modifications ça permet de voir le delai entre commande et livraison #}
                             {{order.updatedAt|date('d/m/Y H:i' )}}
                         {% endif %}
                         </td>

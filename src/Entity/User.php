@@ -71,7 +71,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'author', targetEntity: Comment::class,orphanRemoval:true, cascade: ['persist', 'remove'])]
     private $comment;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class, orphanRemoval:true)]
     private $orders;
 
     public function __construct()

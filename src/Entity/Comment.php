@@ -30,10 +30,10 @@ class Comment
     #[ORM\OneToOne(inversedBy: 'comment', targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $author;
 
-    //peut on afficher publiquement le commentaire ? Choix de l'utilisateur lors du formulaire
+    //peut on afficher publiquement le commentaire ? Choix de l'utilisateur lors du formulaire et modification possible par l'admin
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $publicView;
-
+        
     //création d'une date automatiquement lors de la création du commentaire
     #[ORM\PrePersist]
     public function prePersist(){

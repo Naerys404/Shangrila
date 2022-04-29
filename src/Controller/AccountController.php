@@ -108,8 +108,6 @@ class AccountController extends AbstractController
         }
 
 
-
-
         return $this->render('account/profile.html.twig', [
             'title' => 'Restaurant Shangrila | Mon compte', 'user' => $user, 'tableBookings'=>$tableBookings, 'comment'=>$comment, 'order'=>$order,'form'=>$form->createView()
         ]);

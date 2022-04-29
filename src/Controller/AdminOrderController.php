@@ -48,17 +48,20 @@ class AdminOrderController extends AbstractController
 
    }
 
-   //validation de la commande livrée 
+   //Set dans la bdd que la commande est livrée 
    #[Route('admin/order/{id}/delivered', name:'admin_order_delivered')]
    public function delivered(Order $order, EntityManagerInterface $manager):Response{
 
-        //$order = $manager->createQuery('SET ??? '); 
-        $manager->persist($order);
-        $manager->flush();
+        //si le status de livraison est null ou false, on le set à 1 pour indiquer que la livraison est livrée 
+        if ($order->getDeliveredStatus() == null or $order->getDeliveredStatus() == 0 ){
+            
+            $order->setDeliveredStatus(1);
+            $manager->flush($order);
+        }
+        
 
-        return $this->render('admin/comment/index.html.twig', [
-        'title' => 'Gestion des commandes et livraisons',
-    ]);
+        return $this->redirectToRoute('admin_orders_list');
+    ;
    }
 
 

@@ -107,8 +107,8 @@
                                             <h4 class="mb-3 pt-3">Merci d'avoir donné votre avis ! <i class="fa-solid fa-message-quote"></i></h4>
                                         {% endif %}
                                         <div class="col-md-6 mx-auto">
-                                            {# si il y a deja une réservation ou une commande et si il n'y a pas de commentaire#}
-                                                {% if user.tableBookings|length > 0 or order is not null %}
+                                        {# si il y a deja une réservation / une commande et si il n'y a pas de commentaire#}
+                                        {% if (user.tableBookings|length > 0 or order|length > 0) and user.comment is null %}
 
                                             {{form_start(form)}}
                                                 {{form_widget(form)}}

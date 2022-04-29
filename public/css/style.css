@@ -327,12 +327,14 @@ section.login {
                  /* REGISTER */
 
 section.register {
-    background: url("../img/table-dark.jpg") no-repeat fixed #000;
+    background: url("../img/table-dark.jpg") no-repeat #000;
+    background-size: cover;
 }
 
                     /* PROFILE*/
 section.profile {
-    background: url("../img/fond2.jpg") no-repeat fixed #000;
+    background: url("../img/fond2.jpg") no-repeat #000;
+    background-size: cover;
 }
 section.profile table th {
     margin-bottom:1em;
@@ -394,6 +396,20 @@ section.homeMenu img {
 section.homeMenu .card-footer {
     background-color: #fff;
 }
+/* home BLOG */
+
+section.homeBlog {
+    background: url("../img/food-breakfast-dark.jpg") no-repeat #000;
+    background-size: cover;
+}
+section.homeBlog a {
+    color:var(--marron);
+}
+
+section.showBlog {
+    background: url("../img/food-breakfast-dark.jpg") no-repeat #000;
+    background-size: cover;
+}
 
 /* showMenu*/
 
@@ -401,6 +417,8 @@ section.showMenu {
     background: url("../img/table-dark.jpg") no-repeat #000;
     background-size: cover;
 }
+
+
 
 /* gallery */
 section.gallery {
@@ -475,4 +493,5 @@ a.poweredByStripe {
 /* bundles pages 404 et 403 */
 main.notFound, main.accessDenied {
     background: url("../img/fond3.jpg") no-repeat #000;
+    background-size: cover;
 }

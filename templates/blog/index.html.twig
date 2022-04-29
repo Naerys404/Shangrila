@@ -3,5 +3,37 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block body %}
+{% include 'inc/nav-header.html.twig' %}
+   
+    <section class="container-fluid homeBlog">
+    {% include './inc/flashs.html.twig' %}
+     
+        <div class="row justify-content-center">
+          
+            <div class="col-md-10 jumbotron">
+                <h1 class="h2 mb-4">Blog</h1>
+                <hr class="brown">
+                <div class="row">
+
+                {% for blog in pagination.data %}
+                 <article class="col-4">
+                    <div class="card">
+                        <img src="{{blog.image}}" class="card-img-top" alt="{{blog.title}}">
+                        <div class="card-body">
+                        <h5 class="card-title">{{blog.title}}</h5>
+                        <small><p class="card-text">{{blog.createdAt|date("d-m-Y H:i")}} par {{blog.author}}</p></small>
+                        <p class="card-text">{{blog.content|u.truncate(20, '...', false)}}</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                        <small><a href="{{path('blog_show', {'id':blog.id})}}">+ Détails</a></small>
+                        </div>
+                </article>
+
+                {% endfor %}
+                </div>
+            </div>            
+    </div>
+    
+    </section>
 
 {% endblock %}

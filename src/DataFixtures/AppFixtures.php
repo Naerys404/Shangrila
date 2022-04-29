@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use DateTime;
 use Faker\Factory;
+use App\Entity\Blog;
 use App\Entity\Meal;
 use App\Entity\Menu;
 use App\Entity\User;
@@ -201,7 +202,20 @@ class AppFixtures extends Fixture
                     $meals[]=$fastFoodMeal;
                 }
 
-        
+            //BLOG - création d'articles 
+            for ($i=1;$i<=3;$i++)
+            {
+                $blogs = [];
+                $blog = new Blog();
+                $blog->setTitle($faker->sentence(3))
+                    ->setContent($faker->sentence(100))
+                    ->setAuthor($adminUser->getFirstname())
+                    ->setImage("/img/news-$i.jpg");
+
+                $manager->persist($blog);
+                $blogs[]=$blog;
+            }
+
             $manager->flush();
        
        
