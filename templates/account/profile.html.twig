@@ -108,7 +108,7 @@
                                         {% endif %}
                                         <div class="col-md-6 mx-auto">
                                             {# si il y a deja une réservation ou une commande et si il n'y a pas de commentaire#}
-                                                {% if user.tableBookings|length > 0 and user.comment is null %} {# or delivery != null #}
+                                                {% if user.tableBookings|length > 0 or order is not null %}
 
                                             {{form_start(form)}}
                                                 {{form_widget(form)}}

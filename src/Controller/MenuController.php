@@ -22,12 +22,5 @@ class MenuController extends AbstractController
         ]);
     }
 
-    //affiche le detail d'un menu en particulier + lien pour le commander
-    #[Route('/menu/show/{id}', name:'showMenu')]
-    public function show(Menu $menu){
-
-        return $this->render('menu/showMenu.html.twig', ['title'=>'Restaurant Shangrila | Détail du menu', 'menu'=>$menu, 'id'=>$menu->getId()]);
-    }
-
 
 }

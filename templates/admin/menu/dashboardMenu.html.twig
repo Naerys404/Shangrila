@@ -45,29 +45,10 @@
                             <a href="{{path('admin_meal_edit', {'id': meal.id })}}" class="btn btn-brown btn-sm"><i class="fas fa-edit" aria-hidden="true"></i></a>
                         </td>
                         <td class="align-center">
-                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalMeal">
-                                <i class="fas fa-trash" aria-hidden="true"></i>
-                            </button> 
+                           <a href="{{path('admin_meal_delete', {'id': meal.id })}}" class="btn btn-danger btn-sm"> <i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                     </tr>
-                    <!-- Modal de sécurité suppression plat-->
-                    <div class="modal fade" id="modalMeal" tabindex="-1" aria-labelledby="warningModalMeal" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="warningModalMeal">Attention !</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Etes-vous sûr de vouloir supprimer ce plat ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <a href="{{path('admin_meal_delete', {'id': meal.id })}}" class="btn btn-danger">Supprimer</a> 
-                        </div>
-                        </div>
-                    </div>
-                    </div>
+                    
                     {% endfor %}
                     </tbody>
                 </table>
@@ -98,34 +79,13 @@
                             <a href="{{path('admin_menu_edit', {'id': menu.id })}}" class="btn btn-brown btn-sm"><i class="fas fa-edit" aria-hidden="true"></i></a>
                         </td>
                         <td class="align-center">
-                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalMenu">
-                                <i class="fas fa-trash" aria-hidden="true"></i>
-                            </button>
+                            <a href="{{path('admin_menu_delete', {'id': menu.id })}}" class="btn btn-danger btn-sm"> <i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                     </tr>           
-                    <!-- Modal de sécurité suppression menu-->
-                    <div class="modal fade" id="modalMenu" tabindex="-1" aria-labelledby="warningModalMenu" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="warningModalMenu">Attention !</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Etes-vous sûr de vouloir supprimer ce menu ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <a href="{{path('admin_menu_delete', {'id': menu.id })}}" class="btn btn-danger"> Supprimer</a>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
                     {% endfor %}
                     </tbody>
                 </table>
-                    
-                    
+
                     </div>
                 </div>
                 

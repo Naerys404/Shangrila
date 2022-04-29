@@ -85,7 +85,7 @@
                                 <h5 class="card-title">{{menu.title}}</h5>
                                 <p class="card-text">{{menu.description}}</p>
 
-                                <a class="btn btn-outline-brown" href="{{path('showMenu', {'id':menu.id})}}">Commander</a>
+                                <a href="{{path('payment', {'id':menu.id})}}" class="btn btn-outline-brown">Commander</a>
                                 
                             </div>
                         </div>
@@ -204,7 +204,7 @@
               <div class="carousel-inner d-flex">
                 {% for comment in comments %}
                 <div class="carousel-item{% if loop.index0 == 0 %} active {% endif %}">
-                    <img src="img/chef-thumb.jpg" class="d-block" alt="chef">
+                    <img src="img/avatar.png" class="d-block" alt="rating">
                     <blockquote class="d-block">
                         <i class="fa-solid fa-quote-left"></i> <i>{{comment.content}}</i> <i class="fa-solid fa-quote-right"></i>
                         <p><span class="ratingHome">

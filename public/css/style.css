@@ -8,8 +8,7 @@
 body, html {
     background:#fff;
     min-height: 100vh;
-    min-width: 100vw;
-   
+    min-width: 100vw !important;
 }
 
 main {

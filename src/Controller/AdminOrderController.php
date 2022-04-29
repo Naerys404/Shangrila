@@ -72,10 +72,7 @@ class AdminOrderController extends AbstractController
             $this->addFlash('success', "La commande a bien été supprimée.");
             return $this->redirectToRoute('admin_orders_list');
  
-     
-         return $this->render('admin/comment/index.html.twig', [
-             'title' => 'Gestion des commandes et livraisons',
-         ]);
+        
      }
 
 
