@@ -1,7 +1,7 @@
 # 👩‍🍳 Shangrila
+![screenshot](https://github.com/Naerys404/Shangrila/blob/main/thumb.bmp)
+
 ## :pushpin: Version 
-
-
 Symfony 6.0.4 <br><br>
 ❌ *N'est pas maintenu* <br>
 
